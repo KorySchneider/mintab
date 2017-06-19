@@ -11,6 +11,7 @@ def write(output):
 # autoprefix css
 autoprefix_cmd = 'postcss src/style.css --use autoprefixer --dir build/'
 subprocess.run(autoprefix_cmd.split(), stdout=subprocess.PIPE).stdout.decode('utf-8')
+# autoprefixer prints confirmation/timing
 
 # compile ts
 compile_cmd = 'tsc src/tab.ts --outFile build/tab.js'

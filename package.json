@@ -1,0 +1,25 @@
+{
+  "name": "mintab",
+  "version": "1.0.0",
+  "description": "a startpage",
+  "main": "index.html",
+  "scripts": {
+    "build": "python3 build.py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koryschneider/mintab.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/koryschneider/mintab/issues"
+  },
+  "homepage": "https://github.com/koryschneider/mintab#readme",
+  "devDependencies": {
+    "autoprefixer": "^7.1.1",
+    "html-minifier": "^3.5.2",
+    "postcss-cli": "^4.1.0",
+    "typescript": "^2.3.4"
+  }
+}
