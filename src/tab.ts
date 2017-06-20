@@ -8,10 +8,29 @@ try {
   loadSettings(); // will create defaults if first time on page
 }
 
+// Commands
+function default_cmd(args) {
+  switch(args.length) {
+    case 1:
+      query = 
+  }
+}
+
+function r_cmd(args) {
+}
+
+// Shortcuts
+const shortcuts = {
+  'g': default_cmd,
+  'r': r_cmd
+}
+
 function loadSettings() {
+  //TODO
 }
 
 function saveSettings() {
+  //TODO
 }
 
 function handleKeyDown(e) {
@@ -43,6 +62,17 @@ function interpret() {
     if !(input.includes(' ')) {
       redirect(input);
       return false;
+    }
+  }
+
+  // Parse & execute
+  let args = input.split(';');
+  let command = args[0];
+  args = args.slice(1, args.length);
+
+  for (let i=0; i < shortcuts.length; i++) {
+    if (command == shortcuts[i]) {
+      shortcuts[i](args);
     }
   }
 }
