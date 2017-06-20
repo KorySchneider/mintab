@@ -1,28 +1,13 @@
 window.onload = () => {
 }
 
-// Load settings
+//
+// Settings
+//
 try {
   let SETTINGS = JSON.parse(localStorage.getItem('settings'));
 } catch(e) {
   loadSettings(); // will create defaults if first time on page
-}
-
-// Commands
-function default_cmd(args) {
-  switch(args.length) {
-    case 1:
-      query = 
-  }
-}
-
-function r_cmd(args) {
-}
-
-// Shortcuts
-const shortcuts = {
-  'g': default_cmd,
-  'r': r_cmd
 }
 
 function loadSettings() {
@@ -33,18 +18,37 @@ function saveSettings() {
   //TODO
 }
 
-function handleKeyDown(e) {
-  let keycode: number;
-
-  if (window.event) {
-    keycode = window.event.keyCode;
-  } else if (e) {
-    keycode = e.which;
+//
+// Commands
+//
+function default_cmd(url, search='', query='') {
+  // Components should be URL encoded (or not)
+  // in their respective command functions
+  if (query !== '') {
+    redirect(url + search + query);
+  } else {
+    redirect(url);
   }
+}
 
-  if (keycode == 13) { // Enter key
-    interpret();
+const google = (args) => {
+  if (args.length > 0) {
+    default_cmd('google.com', '/search?q=', args[0]);
+  } else {
+    default_cmd('google.com');
   }
+}
+
+const reddit = (args) => {
+  //TODO
+}
+
+//
+// Shortcuts
+//
+const shortcuts = {
+  'g': google,
+  'r': reddit
 }
 
 function interpret() {
@@ -65,14 +69,20 @@ function interpret() {
     }
   }
 
-  // Parse & execute
+  // Parse & format input
   let args = input.split(';');
-  let command = args[0];
+  let command = args[0].trim();
   args = args.slice(1, args.length);
 
-  for (let i=0; i < shortcuts.length; i++) {
-    if (command == shortcuts[i]) {
-      shortcuts[i](args);
+  for (let i=0; i < args.length; i++) {
+    args[i] = args[i].trim();
+  }
+
+  // Execute
+  let keys = Object.keys(shortcuts);
+  for (let i=0; i < keys.length; i++) {
+    if (command == keys[i]) {
+      shortcuts[command](args);
     }
   }
 }
@@ -83,4 +93,18 @@ function redirect(url) {
     : 'http://' + url;
   window.location.href = url;
   return false;
+}
+
+function handleKeyDown(e) {
+  let keycode: number;
+
+  if (window.event) {
+    keycode = window.event.keyCode;
+  } else if (e) {
+    keycode = e.which;
+  }
+
+  if (keycode == 13) { // Enter key
+    interpret();
+  }
 }
