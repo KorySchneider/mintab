@@ -48,6 +48,9 @@ function interpret() {
 }
 
 function redirect(url) {
+  url = (/(http(s)?:\/\/.)/.test(url))
+    ? url
+    : 'http://' + url;
   window.location.href = url;
   return false;
 }
