@@ -1,9 +1,7 @@
 window.onload = () => {
 }
 
-//
-// Settings
-//
+// Load settings
 try {
   let SETTINGS = JSON.parse(localStorage.getItem('settings'));
 } catch(e) {
@@ -69,20 +67,14 @@ function interpret() {
     }
   }
 
-  // Parse & format input
+  // Parse & execute
   let args = input.split(';');
-  let command = args[0].trim();
+  let command = args[0];
   args = args.slice(1, args.length);
 
-  for (let i=0; i < args.length; i++) {
-    args[i] = args[i].trim();
-  }
-
-  // Execute
-  let keys = Object.keys(shortcuts);
-  for (let i=0; i < keys.length; i++) {
-    if (command == keys[i]) {
-      shortcuts[command](args);
+  for (let i=0; i < shortcuts.length; i++) {
+    if (command == shortcuts[i]) {
+      shortcuts[i](args);
     }
   }
 }
