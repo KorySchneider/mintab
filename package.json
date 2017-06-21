@@ -17,9 +17,11 @@
   },
   "homepage": "https://github.com/koryschneider/mintab#readme",
   "devDependencies": {
+    "@types/jquery": "^3.2.3",
     "autoprefixer": "^7.1.1",
     "html-minifier": "^3.5.2",
     "postcss-cli": "^4.1.0",
     "typescript": "^2.3.4"
-  }
+  },
+  "dependencies": {}
 }
