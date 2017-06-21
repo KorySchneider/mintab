@@ -75,7 +75,7 @@ function simpleSearch(url: string, search: string, args: Array<string>): void {
 }
 
 function interpret(): void {
-  let input = $('#input').val();
+  let input: string = <string>$('#input').val();
 
   // Input is empty
   if (input == '') {
