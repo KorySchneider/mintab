@@ -17,6 +17,8 @@ var COMMANDS = {
     'a': function (args) { simpleSearch('smile.amazon.com', '/s/?field-keywords=', encodeArgs(args)); },
     // Wikipedia
     'w': function (args) { simpleSearch('wikipedia.org', '/w/index.php?title=Special:Search&search=', encodeArgs(args, 1)); },
+    // GitHub
+    'gh': function (args) { simpleSearch('github.com', '/search?q=', encodeArgs(args)); },
     // Wolfram Alpha
     'wa': function (args) { simpleSearch('wolframalpha.com', '/input/?i=', encodeArgs(args)); },
     // Netflix
@@ -27,6 +29,8 @@ var COMMANDS = {
     'gm': function (args) { simpleSearch('maps.google.com', '/maps?q=', encodeArgs(args)); },
     // Google Drive
     'gd': function (args) { simpleSearch('drive.google.com', '/drive/search?q=', encodeArgs(args)); },
+    // Google Calendar
+    'gc': function (args) { simpleSearch('calendar.google.com', '', []); },
     // Google Images
     'img': function (args) { simpleSearch('google.com', '/search?tbm=isch&q=', encodeArgs(args)); },
     // Inbox
