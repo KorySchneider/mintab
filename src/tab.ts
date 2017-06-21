@@ -4,63 +4,63 @@ window.onload = () => {
   loadSettings();
   applySettings();
 
-  $('body').click(() => { $('#input').focus(); });
+  $('body').click(() => { $('#input').focus() });
 }
 
 const COMMANDS = {
   // Google
-  'g': (args) => { simpleSearch('google.com', '/search?q=', encodeArgs(args)); },
+  'g': (args) => { simpleSearch('google.com', '/search?q=', encodeArgs(args)) },
 
   //Reddit
-  'r': (args) => { simpleSearch('reddit.com', '/r/', args); },
+  'r': (args) => { simpleSearch('reddit.com', '/r/', args) },
 
   // DuckDuckGo
   'dg': (args) => { simpleSearch('duckduckgo.com', '/search?q=', encodeArgs(args)) },
 
   // YouTube
-  'y': (args) => { simpleSearch('youtube.com', '/results?search_query=', encodeArgs(args)); },
+  'y': (args) => { simpleSearch('youtube.com', '/results?search_query=', encodeArgs(args)) },
 
   // Amazon
-  'a': (args) => { simpleSearch('smile.amazon.com', '/s/?field-keywords=', encodeArgs(args)); },
+  'a': (args) => { simpleSearch('smile.amazon.com', '/s/?field-keywords=', encodeArgs(args)) },
 
   // Wikipedia
-  'w': (args) => { simpleSearch('wikipedia.org', '/w/index.php?title=Special:Search&search=', encodeArgs(args, 1)); },
+  'w': (args) => { simpleSearch('wikipedia.org', '/w/index.php?title=Special:Search&search=', encodeArgs(args, 1)) },
 
   // GitHub
-  'gh': (args) => { simpleSearch('github.com', '/search?q=', encodeArgs(args)); },
+  'gh': (args) => { simpleSearch('github.com', '/search?q=', encodeArgs(args)) },
 
   // Wolfram Alpha
-  'wa': (args) => { simpleSearch('wolframalpha.com', '/input/?i=', encodeArgs(args)); },
+  'wa': (args) => { simpleSearch('wolframalpha.com', '/input/?i=', encodeArgs(args)) },
 
   // Netflix
-  'n': (args) => { simpleSearch('netflix.com', '/search?q=', encodeArgs(args)); },
+  'n': (args) => { simpleSearch('netflix.com', '/search?q=', encodeArgs(args)) },
 
   // Internet Movie Database
-  'imdb': (args) => { simpleSearch('imdb.com', '/find?s=all&q=', encodeArgs(args)); },
+  'imdb': (args) => { simpleSearch('imdb.com', '/find?s=all&q=', encodeArgs(args)) },
 
   // Google Maps
-  'gm': (args) => { simpleSearch('maps.google.com', '/maps?q=', encodeArgs(args)); },
+  'gm': (args) => { simpleSearch('maps.google.com', '/maps?q=', encodeArgs(args)) },
 
   // Google Drive
-  'gd': (args) => { simpleSearch('drive.google.com', '/drive/search?q=', encodeArgs(args)); },
+  'gd': (args) => { simpleSearch('drive.google.com', '/drive/search?q=', encodeArgs(args)) },
 
   // Google Calendar
-  'gc': (args) => { simpleSearch('calendar.google.com', '', []); },
+  'gc': (args) => { simpleSearch('calendar.google.com', '', []) },
 
   // Google Images
-  'img': (args) => { simpleSearch('google.com', '/search?tbm=isch&q=', encodeArgs(args)); },
+  'img': (args) => { simpleSearch('google.com', '/search?tbm=isch&q=', encodeArgs(args)) },
 
   // Inbox
-  'i': (args) => { simpleSearch('inbox.google.com', '/search/', encodeArgs(args)); },
+  'i': (args) => { simpleSearch('inbox.google.com', '/search/', encodeArgs(args)) },
 
   // Keep
-  'k': (args) => { simpleSearch('keep.google.com', '/#search/text=', encodeArgs(args)); },
+  'k': (args) => { simpleSearch('keep.google.com', '/#search/text=', encodeArgs(args)) },
 
   // Dictionary
-  'dict': (args) => { simpleSearch('dictionary.com', '/browse/', encodeArgs(args)); },
+  'dict': (args) => { simpleSearch('dictionary.com', '/browse/', encodeArgs(args)) },
 
   // Thesaurus
-  'thes': (args) => { simpleSearch('thesaurus.com', '/browse/', encodeArgs(args)); },
+  'thes': (args) => { simpleSearch('thesaurus.com', '/browse/', encodeArgs(args)) },
 
   // Settings
   'set': (args) => {
