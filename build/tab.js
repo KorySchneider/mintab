@@ -41,6 +41,8 @@ var COMMANDS = {
     'dict': function (args) { simpleSearch('dictionary.com', '/browse/', encodeArgs(args)); },
     // Thesaurus
     'thes': function (args) { simpleSearch('thesaurus.com', '/browse/', encodeArgs(args)); },
+    // Help
+    'help': function (args) { redirect('github.com/koryschneider/mintab#readme', true); },
     // Settings
     'set': function (args) {
         var validHex = function (v) { return /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i.test(v); };
@@ -48,7 +50,7 @@ var COMMANDS = {
             switch (args.length) {
                 case 1:
                     // No value given, print current value
-                    displayMessage(SETTINGS[args[0]], 6000);
+                    displayMessage(args[0] + ': ' + SETTINGS[args[0]], 8000);
                     break;
                 case 2:
                     // Set value
@@ -73,6 +75,7 @@ var COMMANDS = {
         else if (args[0] == 'defaults') {
             localStorage.removeItem('settings');
             loadSettings();
+            displayMessage('Settings reset to defaults', 6000);
         }
         saveSettings();
         applySettings();
@@ -80,6 +83,7 @@ var COMMANDS = {
 };
 function interpret() {
     var input = $('#input').val();
+    $('#input').val('');
     // Input is empty
     if (input == '') {
         return;
@@ -120,11 +124,18 @@ function simpleSearch(url, search, args) {
     }
     redirect(destination);
 }
-function redirect(url) {
+function redirect(url, newtab) {
+    if (newtab === void 0) { newtab = false; }
     url = (/(http(s)?:\/\/.)/.test(url))
         ? url
         : 'http://' + url;
-    window.location.href = url;
+    if (newtab) {
+        var win = window.open(url);
+        win.focus();
+    }
+    else {
+        window.location.href = url;
+    }
     return false;
 }
 function encodeArgs(args, alt) {
@@ -163,10 +174,10 @@ function saveSettings() {
     localStorage.setItem('settings', JSON.stringify(SETTINGS));
 }
 function displayMessage(msg, timeMs) {
-    $('#message').show().text(msg);
+    $('#message').text(msg);
     if (timeMs > 0) {
         setTimeout(function () {
-            $('#message').html('').prop('display', 'none');
+            $('#message').html('');
         }, timeMs);
     }
 }
