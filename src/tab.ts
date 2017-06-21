@@ -151,6 +151,16 @@ function loadSettings(): void {
 
     SETTINGS = JSON.parse(localStorage.getItem('settings'));
   }
+}
+
+function applySettings(): void {
+  $('body').css('background-color', SETTINGS['bgColor']);
+  $('body').css('color', SETTINGS['textColor']);
+}
+
+function saveSettings(): void {
+  localStorage.setItem('settings', JSON.stringify(SETTINGS));
+}
 
 function handleKeyDown(e): void {
   let keycode: number = e.which || e.keyCode;
