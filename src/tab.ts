@@ -95,9 +95,7 @@ function simpleSearch(url: string, search: string, args: Array<string>): void {
 }
 
 function interpret() {
-  let inputBox = $('#input');
-  let input = inputBox.val();
-  inputBox.select();
+  let input = $('#input').val();
 
   // Input is empty
   if (input == '') {
