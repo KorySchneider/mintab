@@ -104,6 +104,7 @@ const COMMANDS = {
 
 function interpret(): void {
   let input: string = <string>$('#input').val();
+  $('#input').val('');
 
   // Input is empty
   if (input == '') {
