@@ -43,9 +43,39 @@ var COMMANDS = {
     'thes': function (args) { simpleSearch('thesaurus.com', '/browse/', encodeArgs(args)); },
     // Settings
     'set': function (args) {
-        // TODO
-        // syntax:
-        // set <setting> <value>
+        var validHex = function (v) { return /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i.test(v); };
+        if (Object.keys(SETTINGS).includes(args[0])) {
+            switch (args.length) {
+                case 1:
+                    // No value given, print current value
+                    displayMessage(SETTINGS[args[0]], 6000);
+                    break;
+                case 2:
+                    // Set value
+                    if (args[0] == 'defaultCommand') {
+                        if (Object.keys(COMMANDS).includes(args[1])) {
+                            SETTINGS['defaultCommand'] = args[1];
+                        }
+                    }
+                    else if (args[0] == 'bgColor') {
+                        if (validHex(args[1])) {
+                            SETTINGS['bgColor'] = args[1];
+                        }
+                    }
+                    else if (args[0] == 'textColor') {
+                        if (validHex(args[1])) {
+                            SETTINGS['textColor'] = args[1];
+                        }
+                    }
+                    break;
+            }
+        }
+        else if (args[0] == 'defaults') {
+            localStorage.removeItem('settings');
+            loadSettings();
+        }
+        saveSettings();
+        applySettings();
     }
 };
 function interpret() {
@@ -131,6 +161,14 @@ function applySettings() {
 }
 function saveSettings() {
     localStorage.setItem('settings', JSON.stringify(SETTINGS));
+}
+function displayMessage(msg, timeMs) {
+    $('#message').show().text(msg);
+    if (timeMs > 0) {
+        setTimeout(function () {
+            $('#message').html('').prop('display', 'none');
+        }, timeMs);
+    }
 }
 function handleKeyDown(e) {
     var keycode = e.which || e.keyCode;
