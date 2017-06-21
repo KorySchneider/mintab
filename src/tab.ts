@@ -163,7 +163,7 @@ function redirect(url: string): boolean {
   return false;
 }
 
-function encodeArgs(args: Array<string>, alt:number = 0): Array<string> {
+function encodeArgs(args: Array<string>, alt: number = 0): Array<string> {
   if (alt) {
     for (let i=0; i < args.length; i++) {
       args[i] = args[i].replace(/ /g, '+'); // replace spaces with plus signs
