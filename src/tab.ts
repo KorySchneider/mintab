@@ -1,5 +1,6 @@
 window.onload = () => {
-}
+  loadSettings();
+  applySettings();
 
 //
 // Settings
@@ -11,24 +12,23 @@ try {
 }
 
 function loadSettings() {
-  //TODO
-}
+  if (typeof(Storage)) {
+    // Create settings object if it doesn't exist
+    if (localStorage.getItem('settings') == null) {
+      let defaultSettings = {
+        'bgColor': '#282828',
+        'textColor': '#ebdbb2'
+      };
+      localStorage.setItem('settings', JSON.stringify(defaultSettings));
+    }
 
-function saveSettings() {
-  //TODO
-}
-
-//
-// Commands
-//
-function default_cmd(url, search='', query='') {
-  // Components should be URL encoded (or not)
-  // in their respective command functions
-  if (query !== '') {
-    redirect(url + search + query);
-  } else {
-    redirect(url);
+    SETTINGS = JSON.parse(localStorage.getItem('settings'));
   }
+}
+
+function applySettings() {
+  $('body').css('background-color', SETTINGS['bgColor']);
+  $('body').css('color', SETTINGS['textColor']);
 }
 
 const COMMANDS = {
