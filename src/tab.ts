@@ -152,6 +152,8 @@ function loadSettings(): void {
     SETTINGS = JSON.parse(localStorage.getItem('settings'));
   }
 
+function handleKeyDown(e): void {
+  let keycode: number = e.which || e.keyCode;
   if (keycode == 13) { // Enter key
     interpret();
   }
