@@ -1,25 +1,9 @@
+var SETTINGS;
 window.onload = function () {
     loadSettings();
     applySettings();
     $('body').click(function () { $('#input').focus(); });
 };
-function loadSettings() {
-    if (typeof (Storage)) {
-        // Create settings object if it doesn't exist
-        if (localStorage.getItem('settings') == null) {
-            var defaultSettings = {
-                'bgColor': '#282828',
-                'textColor': '#ebdbb2'
-            };
-            localStorage.setItem('settings', JSON.stringify(defaultSettings));
-        }
-        SETTINGS = JSON.parse(localStorage.getItem('settings'));
-    }
-}
-function applySettings() {
-    $('body').css('background-color', SETTINGS['bgColor']);
-    $('body').css('color', SETTINGS['textColor']);
-}
 var COMMANDS = {
     // Google
     'g': function (args) { simpleSearch('google.com', '/search?q=', encodeArgs(args)); },
@@ -53,12 +37,11 @@ var COMMANDS = {
     'dict': function (args) { simpleSearch('dictionary.com', '/browse/', encodeArgs(args)); },
     // Thesaurus
     'thes': function (args) { simpleSearch('thesaurus.com', '/browse/', encodeArgs(args)); },
-    // Color settings
-    'bgColor': function (args) {
-        //TODO
-    },
-    'textColor': function (args) {
-        //TODO
+    // Settings
+    'set': function (args) {
+        // TODO
+        // syntax:
+        // set <setting> <value>
     }
 };
 function simpleSearch(url, search, args) {
@@ -69,33 +52,38 @@ function simpleSearch(url, search, args) {
     redirect(destination);
 }
 function interpret() {
-    var inputBox = $('#input');
-    var input = inputBox.val();
-    inputBox.select();
+    var input = $('#input').val();
     // Input is empty
     if (input == '') {
         return;
     }
     // Input is a URL
     if (/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(input)) {
-        if (!(input.includes(' '))) {
+        if (!input.includes(' ')) {
             redirect(input);
-            return false;
+            return;
         }
     }
     // Parse & format input
     var args = input.split(';');
     var command = args[0].trim();
-    args = args.slice(1, args.length);
     for (var i = 0; i < args.length; i++) {
         args[i] = args[i].trim();
     }
     // Execute
+    var validCommand = false;
     var keys = Object.keys(COMMANDS);
     for (var i = 0; i < keys.length; i++) {
         if (command == keys[i]) {
-            COMMANDS[command](args);
+            validCommand = true;
         }
+    }
+    if (validCommand) {
+        args = args.slice(1, args.length);
+        COMMANDS[command](args);
+    }
+    else {
+        COMMANDS[SETTINGS['defaultCommand']](args);
     }
 }
 function redirect(url) {
@@ -119,14 +107,29 @@ function encodeArgs(args, alt) {
     }
     return args;
 }
+function loadSettings() {
+    if (typeof (Storage)) {
+        // Create settings object if it doesn't exist
+        if (localStorage.getItem('settings') == null) {
+            var defaultSettings = {
+                'defaultCommand': 'g',
+                'bgColor': '#282828',
+                'textColor': '#ebdbb2'
+            };
+            localStorage.setItem('settings', JSON.stringify(defaultSettings));
+        }
+        SETTINGS = JSON.parse(localStorage.getItem('settings'));
+    }
+}
+function applySettings() {
+    $('body').css('background-color', SETTINGS['bgColor']);
+    $('body').css('color', SETTINGS['textColor']);
+}
+function saveSettings() {
+    localStorage.setItem('settings', JSON.stringify(SETTINGS));
+}
 function handleKeyDown(e) {
-    var keycode;
-    if (window.event) {
-        keycode = window.event.keyCode;
-    }
-    else if (e) {
-        keycode = e.which;
-    }
+    var keycode = e.which || e.keyCode;
     if (keycode == 13) {
         interpret();
     }
