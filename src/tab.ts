@@ -70,16 +70,6 @@ const COMMANDS = {
   }
 }
 
-function simpleSearch(url: string, search: string, args: Array<string>): void {
-  let destination = url;
-
-  if (args.length > 0 && args[0] !== '') {
-    destination += search + args[0];
-  }
-
-  redirect(destination);
-}
-
 function interpret(): void {
   let input: string = <string>$('#input').val();
 
@@ -120,6 +110,16 @@ function interpret(): void {
   } else {
     COMMANDS[SETTINGS['defaultCommand']](args);
   }
+}
+
+function simpleSearch(url: string, search: string, args: Array<string>): void {
+  let destination = url;
+
+  if (args.length > 0 && args[0] !== '') {
+    destination += search + args[0];
+  }
+
+  redirect(destination);
 }
 
 function redirect(url: string): boolean {
