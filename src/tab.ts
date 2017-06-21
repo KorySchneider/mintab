@@ -197,10 +197,10 @@ function saveSettings(): void {
 }
 
 function displayMessage(msg: string, timeMs: number): void {
-  $('#message').show().text(msg);
+  $('#message').text(msg);
   if (timeMs > 0) {
     setTimeout(() => {
-      $('#message').html('').prop('display', 'none');
+      $('#message').html('');
     }, timeMs);
   }
 }
