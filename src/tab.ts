@@ -26,6 +26,9 @@ const COMMANDS = {
   // Wikipedia
   'w': (args) => { simpleSearch('wikipedia.org', '/w/index.php?title=Special:Search&search=', encodeArgs(args, 1)); },
 
+  // GitHub
+  'gh': (args) => { simpleSearch('github.com', '/search?q=', encodeArgs(args)); },
+
   // Wolfram Alpha
   'wa': (args) => { simpleSearch('wolframalpha.com', '/input/?i=', encodeArgs(args)); },
 
