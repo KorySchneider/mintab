@@ -56,13 +56,11 @@ const COMMANDS = {
   // Thesaurus
   'thes': (args) => { simpleSearch('thesaurus.com', '/browse/', encodeArgs(args)); },
 
-  // Color settings
-  'bgColor': (args) => {
-    //TODO
-  },
-
-  'textColor': (args) => {
-    //TODO
+  // Settings
+  'set': (args) => {
+    // TODO
+    // syntax:
+    // set <setting> <value>
   }
 }
 
@@ -86,27 +84,35 @@ function interpret(): void {
 
   // Input is a URL
   if (/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(input)) {
-    if !(input.includes(' ')) {
+    if (!input.includes(' ')) {
       redirect(input);
-      return false;
+      return;
     }
   }
 
   // Parse & format input
-  let args = input.split(';');
-  let command = args[0].trim();
-  args = args.slice(1, args.length);
+  let args: Array<string> = input.split(';');
+  let command: string = args[0].trim();
 
   for (let i=0; i < args.length; i++) {
     args[i] = args[i].trim();
   }
 
   // Execute
+  let validCommand: boolean = false;
+
   let keys = Object.keys(COMMANDS);
   for (let i=0; i < keys.length; i++) {
     if (command == keys[i]) {
-      COMMANDS[command](args);
+      validCommand = true;
     }
+  }
+
+  if (validCommand) {
+    args = args.slice(1, args.length);
+    COMMANDS[command](args);
+  } else {
+    COMMANDS[SETTINGS['defaultCommand']](args);
   }
 }
 
