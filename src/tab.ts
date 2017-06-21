@@ -1,28 +1,10 @@
+let SETTINGS: object;
+
 window.onload = () => {
   loadSettings();
   applySettings();
 
   $('body').click(() => { $('#input').focus(); });
-}
-
-function loadSettings(): void {
-  if (typeof(Storage)) {
-    // Create settings object if it doesn't exist
-    if (localStorage.getItem('settings') == null) {
-      let defaultSettings = {
-        'bgColor': '#282828',
-        'textColor': '#ebdbb2'
-      };
-      localStorage.setItem('settings', JSON.stringify(defaultSettings));
-    }
-
-    SETTINGS = JSON.parse(localStorage.getItem('settings'));
-  }
-}
-
-function applySettings(): void {
-  $('body').css('background-color', SETTINGS['bgColor']);
-  $('body').css('color', SETTINGS['textColor']);
 }
 
 const COMMANDS = {
@@ -149,12 +131,19 @@ function encodeArgs(args: Array<string>, alt:number = 0): Array<string> {
   return args;
 }
 
-function handleKeyDown(e): void {
-  let keycode: number;
-  if (window.event) {
-    keycode = window.event.keyCode;
-  } else if (e) {
-    keycode = e.which;
+function loadSettings(): void {
+  if (typeof(Storage)) {
+    // Create settings object if it doesn't exist
+    if (localStorage.getItem('settings') == null) {
+      let defaultSettings = {
+        'defaultCommand': 'g',
+        'bgColor': '#282828',
+        'textColor': '#ebdbb2'
+      };
+      localStorage.setItem('settings', JSON.stringify(defaultSettings));
+    }
+
+    SETTINGS = JSON.parse(localStorage.getItem('settings'));
   }
 
   if (keycode == 13) { // Enter key
