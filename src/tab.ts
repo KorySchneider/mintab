@@ -155,11 +155,18 @@ function simpleSearch(url: string, search: string, args: Array<string>): void {
   redirect(destination);
 }
 
-function redirect(url: string): boolean {
+function redirect(url: string, newtab: boolean = false): boolean {
   url = (/(http(s)?:\/\/.)/.test(url))
     ? url
     : 'http://' + url;
-  window.location.href = url;
+
+  if (newtab) {
+    let win = window.open(url);
+    win.focus()
+  } else {
+    window.location.href = url;
+  }
+
   return false;
 }
 
