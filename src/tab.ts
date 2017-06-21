@@ -5,7 +5,7 @@ window.onload = () => {
   $('body').click(() => { $('#input').focus(); });
 }
 
-function loadSettings() {
+function loadSettings(): void {
   if (typeof(Storage)) {
     // Create settings object if it doesn't exist
     if (localStorage.getItem('settings') == null) {
@@ -20,7 +20,7 @@ function loadSettings() {
   }
 }
 
-function applySettings() {
+function applySettings(): void {
   $('body').css('background-color', SETTINGS['bgColor']);
   $('body').css('color', SETTINGS['textColor']);
 }
@@ -84,7 +84,7 @@ const COMMANDS = {
   }
 }
 
-function simpleSearch(url: string, search: string, args: Array<string>) {
+function simpleSearch(url: string, search: string, args: Array<string>): void {
   let destination = url;
 
   if (args.length > 0 && args[0] !== '') {
@@ -130,7 +130,7 @@ function interpret() {
   }
 }
 
-function redirect(url) {
+function redirect(url): boolean {
   url = (/(http(s)?:\/\/.)/.test(url))
     ? url
     : 'http://' + url;
@@ -151,7 +151,7 @@ function encodeArgs(args: Array<string>, alt:number = 0): Array<string> {
   return args;
 }
 
-function handleKeyDown(e) {
+function handleKeyDown(e): void {
   let keycode: number;
   if (window.event) {
     keycode = window.event.keyCode;
