@@ -44,6 +44,9 @@ const COMMANDS = {
   // Google Drive
   'gd': (args) => { simpleSearch('drive.google.com', '/drive/search?q=', encodeArgs(args)); },
 
+  // Google Calendar
+  'gc': (args) => { simpleSearch('calendar.google.com', '', []); },
+
   // Google Images
   'img': (args) => { simpleSearch('google.com', '/search?tbm=isch&q=', encodeArgs(args)); },
 
