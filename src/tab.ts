@@ -62,6 +62,9 @@ const COMMANDS = {
   // Thesaurus
   'thes': (args) => { simpleSearch('thesaurus.com', '/browse/', encodeArgs(args)) },
 
+  // Help
+  'help': (args) => { redirect('github.com/koryschneider/mintab#readme', true) },
+
   // Settings
   'set': (args) => {
     const validHex = (v) => { return /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i.test(v) }
