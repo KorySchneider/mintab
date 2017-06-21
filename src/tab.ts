@@ -122,7 +122,7 @@ function interpret(): void {
   }
 }
 
-function redirect(url): boolean {
+function redirect(url: string): boolean {
   url = (/(http(s)?:\/\/.)/.test(url))
     ? url
     : 'http://' + url;
