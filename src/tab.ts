@@ -94,7 +94,7 @@ function simpleSearch(url: string, search: string, args: Array<string>): void {
   redirect(destination);
 }
 
-function interpret() {
+function interpret(): void {
   let input = $('#input').val();
 
   // Input is empty
