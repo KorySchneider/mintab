@@ -31,24 +31,73 @@ function default_cmd(url, search='', query='') {
   }
 }
 
-const google = (args) => {
-  if (args.length > 0) {
-    default_cmd('google.com', '/search?q=', args[0]);
-  } else {
-    default_cmd('google.com');
+const COMMANDS = {
+  // Google
+  'g': (args) => { simpleSearch('google.com', '/search?q=', encodeArgs(args)); },
+
+  //Reddit
+  'r': (args) => { simpleSearch('reddit.com', '/r/', args); },
+
+  // DuckDuckGo
+  'dg': (args) => { simpleSearch('duckduckgo.com', '/search?q=', encodeArgs(args)) },
+
+  // YouTube
+  'y': (args) => { simpleSearch('youtube.com', '/results?search_query=', encodeArgs(args)); },
+
+  // Amazon
+  'a': (args) => { simpleSearch('smile.amazon.com', '/s/?field-keywords=', encodeArgs(args)); },
+
+  // Wikipedia
+  'w': (args) => { simpleSearch('wikipedia.org', '/w/index.php?title=Special:Search&search=', encodeArgs(args, 1)); },
+
+  // Wolfram Alpha
+  'wa': (args) => { simpleSearch('wolframalpha.com', '/input/?i=', encodeArgs(args)); },
+
+  // Netflix
+  'n': (args) => { simpleSearch('netflix.com', '/search?q=', encodeArgs(args)); },
+
+  // Internet Movie Database
+  'imdb': (args) => { simpleSearch('imdb.com', '/find?s=all&q=', encodeArgs(args)); },
+
+  // Google Maps
+  'gm': (args) => { simpleSearch('maps.google.com', '/maps?q=', encodeArgs(args)); },
+
+  // Google Drive
+  'gd': (args) => { simpleSearch('drive.google.com', '/drive/search?q=', encodeArgs(args)); },
+
+  // Google Images
+  'img': (args) => { simpleSearch('google.com', '/search?tbm=isch&q=', encodeArgs(args)); },
+
+  // Inbox
+  'i': (args) => { simpleSearch('inbox.google.com', '/search/', encodeArgs(args)); },
+
+  // Keep
+  'k': (args) => { simpleSearch('keep.google.com', '/#search/text=', encodeArgs(args)); },
+
+  // Dictionary
+  'dict': (args) => { simpleSearch('dictionary.com', '/browse/', encodeArgs(args)); },
+
+  // Thesaurus
+  'thes': (args) => { simpleSearch('thesaurus.com', '/browse/', encodeArgs(args)); },
+
+  // Color settings
+  'bgColor': (args) => {
+    //TODO
+  },
+
+  'textColor': (args) => {
+    //TODO
   }
 }
 
-const reddit = (args) => {
-  //TODO
-}
+function simpleSearch(url: string, search: string, args: Array<string>) {
+  let destination = url;
 
-//
-// Shortcuts
-//
-const shortcuts = {
-  'g': google,
-  'r': reddit
+  if (args.length > 0 && args[0] !== '') {
+    destination += search + args[0];
+  }
+
+  redirect(destination);
 }
 
 function interpret() {
@@ -79,10 +128,10 @@ function interpret() {
   }
 
   // Execute
-  let keys = Object.keys(shortcuts);
+  let keys = Object.keys(COMMANDS);
   for (let i=0; i < keys.length; i++) {
     if (command == keys[i]) {
-      shortcuts[command](args);
+      COMMANDS[command](args);
     }
   }
 }
@@ -95,9 +144,21 @@ function redirect(url) {
   return false;
 }
 
+function encodeArgs(args: Array<string>, alt:number = 0): Array<string> {
+  if (alt) {
+    for (let i=0; i < args.length; i++) {
+      args[i] = args[i].replace(/ /g, '+'); // replace spaces with plus signs
+    }
+  } else {
+    for (let i=0; i < args.length; i++) {
+      args[i] = encodeURIComponent(args[i]); // uri encode
+    }
+  }
+  return args;
+}
+
 function handleKeyDown(e) {
   let keycode: number;
-
   if (window.event) {
     keycode = window.event.keyCode;
   } else if (e) {
