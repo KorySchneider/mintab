@@ -70,7 +70,7 @@ const COMMANDS = {
       switch(args.length) {
         case 1:
           // No value given, print current value
-          displayMessage(SETTINGS[args[0]], 6000);
+          displayMessage(args[0] + ': ' + SETTINGS[args[0]], 8000);
           break;
         case 2:
           // Set value
@@ -90,11 +90,12 @@ const COMMANDS = {
           break;
       }
     } else if (args[0] == 'defaults') {
-        localStorage.removeItem('settings');
-        loadSettings();
-      }
-      saveSettings();
-      applySettings();
+      localStorage.removeItem('settings');
+      loadSettings();
+      displayMessage('Settings reset to defaults', 6000);
+    }
+    saveSettings();
+    applySettings();
   }
 }
 
