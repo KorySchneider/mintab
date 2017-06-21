@@ -2,13 +2,7 @@ window.onload = () => {
   loadSettings();
   applySettings();
 
-//
-// Settings
-//
-try {
-  let SETTINGS = JSON.parse(localStorage.getItem('settings'));
-} catch(e) {
-  loadSettings(); // will create defaults if first time on page
+  $('body').click(() => { $('#input').focus(); });
 }
 
 function loadSettings() {
