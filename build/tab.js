@@ -48,13 +48,6 @@ var COMMANDS = {
         // set <setting> <value>
     }
 };
-function simpleSearch(url, search, args) {
-    var destination = url;
-    if (args.length > 0 && args[0] !== '') {
-        destination += search + args[0];
-    }
-    redirect(destination);
-}
 function interpret() {
     var input = $('#input').val();
     // Input is empty
@@ -89,6 +82,13 @@ function interpret() {
     else {
         COMMANDS[SETTINGS['defaultCommand']](args);
     }
+}
+function simpleSearch(url, search, args) {
+    var destination = url;
+    if (args.length > 0 && args[0] !== '') {
+        destination += search + args[0];
+    }
+    redirect(destination);
 }
 function redirect(url) {
     url = (/(http(s)?:\/\/.)/.test(url))
