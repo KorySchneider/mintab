@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Spectral');
+
 html,
 body {
   width: 100vw;
@@ -18,4 +20,11 @@ body {
   width: 80%;
   height: 25px;
   text-align: center;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 8px;
+  color: inherit;
+  font-size: 36px;
+  font-family: 'Spectral', serif;
 }
