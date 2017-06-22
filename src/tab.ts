@@ -233,7 +233,7 @@ function interpret(): void {
   }
 }
 
-function redirect(url: string, search: string, query?: string, args?: Array<string>, newtab: boolean = false): boolean {
+function redirect(url: string, search?: string, query?: string, args?: Array<string>, newtab: boolean = false): boolean {
   let destination = url;
 
   destination = (/(http(s)?:\/\/.)/.test(destination))
