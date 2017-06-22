@@ -9,7 +9,7 @@ window.onload = () => {
 
 const COMMANDS = {
   // Google
-  'g': (args) => { simpleSearch('google.com', '/search?q=', encodeArgs(args)) },
+  'g': (args) => { redirect('google.com', '/search?q=', undefined, encodeArgs(args)) },
 
   //Reddit
   'r': (args) => {
@@ -24,7 +24,7 @@ const COMMANDS = {
         redirect(url);
         break;
       case 1:
-        simpleSearch(url, search, args);
+        redirect(url, search, undefined, args);
         break;
       case 2:
         query += (validSort(args[1]))
@@ -34,7 +34,7 @@ const COMMANDS = {
       case 3:
         if (['top', 'controversial'].includes(args[1])) {
           query += (validRange(args[2]))
-            ? '/' + args[1] + '/' + args[2]
+            ? '/' + args[1] + '?t=' + args[2]
             : '';
         } else {
           query += (validSort(args[1]))
@@ -43,23 +43,22 @@ const COMMANDS = {
         }
         break;
     }
-    simpleSearch(url, search, [query]);
+    redirect(url, search, query, undefined);
   },
 
   // DuckDuckGo
-  'dg': (args) => { simpleSearch('duckduckgo.com', '/search?q=', encodeArgs(args)) },
+  'dg': (args) => { redirect('duckduckgo.com', '/?q=', undefined, encodeArgs(args)) },
 
   // YouTube
-  'y': (args) => { simpleSearch('youtube.com', '/results?search_query=', encodeArgs(args)) },
+  'y': (args) => { redirect('youtube.com', '/results?search_query=', undefined, encodeArgs(args)) },
 
   // Amazon
-  'a': (args) => { simpleSearch('smile.amazon.com', '/s/?field-keywords=', encodeArgs(args)) },
+  'a': (args) => { redirect('smile.amazon.com', '/s/?field-keywords=', undefined, encodeArgs(args)) },
 
   // Wikipedia
-  'w': (args) => { simpleSearch('wikipedia.org', '/w/index.php?title=Special:Search&search=', encodeArgs(args, 1)) },
+  'w': (args) => { redirect('wikipedia.org', '/w/index.php?title=Special:Search&search=', undefined, encodeArgs(args, 1)) },
 
   // GitHub
-  //'gh': (args) => { simpleSearch('github.com', '/search?q=', encodeArgs(args)) },
   'gh': (args) => {
     const url = 'github.com'; const search = '/';
     args = encodeArgs(args);
@@ -73,41 +72,41 @@ const COMMANDS = {
         query += '/' + args[1];
         break;
     }
-    simpleSearch(url, search, [query]);
+    redirect(url, search, query, undefined);
   },
 
   // Wolfram Alpha
-  'wa': (args) => { simpleSearch('wolframalpha.com', '/input/?i=', encodeArgs(args)) },
+  'wa': (args) => { redirect('wolframalpha.com', '/input/?i=', undefined, encodeArgs(args)) },
 
   // Netflix
-  'n': (args) => { simpleSearch('netflix.com', '/search?q=', encodeArgs(args)) },
+  'n': (args) => { redirect('netflix.com', '/search?q=', undefined, encodeArgs(args)) },
 
   // Internet Movie Database
-  'imdb': (args) => { simpleSearch('imdb.com', '/find?s=all&q=', encodeArgs(args)) },
+  'imdb': (args) => { redirect('imdb.com', '/find?s=all&q=', undefined, encodeArgs(args)) },
 
   // Google Maps
-  'gm': (args) => { simpleSearch('maps.google.com', '/maps?q=', encodeArgs(args)) },
+  'gm': (args) => { redirect('maps.google.com', '/maps?q=', undefined, encodeArgs(args)) },
 
   // Google Drive
-  'gd': (args) => { simpleSearch('drive.google.com', '/drive/search?q=', encodeArgs(args)) },
+  'gd': (args) => { redirect('drive.google.com', '/drive/search?q=', undefined, encodeArgs(args)) },
 
   // Google Calendar
-  'gc': (args) => { simpleSearch('calendar.google.com', '', []) },
+  'gc': (args) => { redirect('calendar.google.com', '', '', undefined) },
 
   // Google Images
-  'img': (args) => { simpleSearch('google.com', '/search?tbm=isch&q=', encodeArgs(args)) },
+  'img': (args) => { redirect('google.com', '/search?tbm=isch&q=', undefined, encodeArgs(args)) },
 
   // Inbox
-  'i': (args) => { simpleSearch('inbox.google.com', '/search/', encodeArgs(args)) },
+  'i': (args) => { redirect('inbox.google.com', '/search/', undefined, encodeArgs(args)) },
 
   // Keep
-  'k': (args) => { simpleSearch('keep.google.com', '/#search/text=', encodeArgs(args)) },
+  'k': (args) => { redirect('keep.google.com', '/#search/text=', undefined, encodeArgs(args)) },
 
   // Dictionary
-  'dict': (args) => { simpleSearch('dictionary.com', '/browse/', encodeArgs(args)) },
+  'dict': (args) => { redirect('dictionary.com', '/browse/', undefined, encodeArgs(args)) },
 
   // Thesaurus
-  'thes': (args) => { simpleSearch('thesaurus.com', '/browse/', encodeArgs(args)) },
+  'thes': (args) => { redirect('thesaurus.com', '/browse/', undefined, encodeArgs(args)) },
 
   // Help
   'help': (args) => { redirect('github.com/koryschneider/mintab#readme', true) },
@@ -200,25 +199,25 @@ function interpret(): void {
   }
 }
 
-function simpleSearch(url: string, search: string, args: Array<string>): void {
+function redirect(url: string, search: string, query?: string, args?: Array<string>, newtab: boolean = false): boolean {
   let destination = url;
 
-  if (args.length > 0 && args[0] !== '') {
-    destination += search + args[0];
+  destination = (/(http(s)?:\/\/.)/.test(destination))
+    ? destination
+    : 'http://' + destination;
+
+  if (query) {
+    destination += search + query;
+  } else if (args) {
+    if (args.length > 0 && args[0] !== '') {
+      destination += search + args[0];
+    }
   }
 
-  redirect(destination);
-}
-
-function redirect(url: string, newtab: boolean = false): boolean {
-  url = (/(http(s)?:\/\/.)/.test(url))
-    ? url
-    : 'http://' + url;
-
   if (newtab) {
-    window.open(url).focus();
+    window.open(destination).focus();
   } else {
-    window.location.href = url;
+    window.location.href = destination;
   }
   return false;
 }

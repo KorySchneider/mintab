@@ -6,7 +6,7 @@ window.onload = function () {
 };
 var COMMANDS = {
     // Google
-    'g': function (args) { simpleSearch('google.com', '/search?q=', encodeArgs(args)); },
+    'g': function (args) { redirect('google.com', '/search?q=', undefined, encodeArgs(args)); },
     //Reddit
     'r': function (args) {
         var url = 'reddit.com';
@@ -19,7 +19,7 @@ var COMMANDS = {
                 redirect(url);
                 break;
             case 1:
-                simpleSearch(url, search, args);
+                redirect(url, search, undefined, args);
                 break;
             case 2:
                 query += (validSort(args[1]))
@@ -29,7 +29,7 @@ var COMMANDS = {
             case 3:
                 if (['top', 'controversial'].includes(args[1])) {
                     query += (validRange(args[2]))
-                        ? '/' + args[1] + '/' + args[2]
+                        ? '/' + args[1] + '?t=' + args[2]
                         : '';
                 }
                 else {
@@ -39,18 +39,17 @@ var COMMANDS = {
                 }
                 break;
         }
-        simpleSearch(url, search, [query]);
+        redirect(url, search, query, undefined);
     },
     // DuckDuckGo
-    'dg': function (args) { simpleSearch('duckduckgo.com', '/search?q=', encodeArgs(args)); },
+    'dg': function (args) { redirect('duckduckgo.com', '/?q=', undefined, encodeArgs(args)); },
     // YouTube
-    'y': function (args) { simpleSearch('youtube.com', '/results?search_query=', encodeArgs(args)); },
+    'y': function (args) { redirect('youtube.com', '/results?search_query=', undefined, encodeArgs(args)); },
     // Amazon
-    'a': function (args) { simpleSearch('smile.amazon.com', '/s/?field-keywords=', encodeArgs(args)); },
+    'a': function (args) { redirect('smile.amazon.com', '/s/?field-keywords=', undefined, encodeArgs(args)); },
     // Wikipedia
-    'w': function (args) { simpleSearch('wikipedia.org', '/w/index.php?title=Special:Search&search=', encodeArgs(args, 1)); },
+    'w': function (args) { redirect('wikipedia.org', '/w/index.php?title=Special:Search&search=', undefined, encodeArgs(args, 1)); },
     // GitHub
-    //'gh': (args) => { simpleSearch('github.com', '/search?q=', encodeArgs(args)) },
     'gh': function (args) {
         var url = 'github.com';
         var search = '/';
@@ -64,30 +63,30 @@ var COMMANDS = {
                 query += '/' + args[1];
                 break;
         }
-        simpleSearch(url, search, [query]);
+        redirect(url, search, query, undefined);
     },
     // Wolfram Alpha
-    'wa': function (args) { simpleSearch('wolframalpha.com', '/input/?i=', encodeArgs(args)); },
+    'wa': function (args) { redirect('wolframalpha.com', '/input/?i=', undefined, encodeArgs(args)); },
     // Netflix
-    'n': function (args) { simpleSearch('netflix.com', '/search?q=', encodeArgs(args)); },
+    'n': function (args) { redirect('netflix.com', '/search?q=', undefined, encodeArgs(args)); },
     // Internet Movie Database
-    'imdb': function (args) { simpleSearch('imdb.com', '/find?s=all&q=', encodeArgs(args)); },
+    'imdb': function (args) { redirect('imdb.com', '/find?s=all&q=', undefined, encodeArgs(args)); },
     // Google Maps
-    'gm': function (args) { simpleSearch('maps.google.com', '/maps?q=', encodeArgs(args)); },
+    'gm': function (args) { redirect('maps.google.com', '/maps?q=', undefined, encodeArgs(args)); },
     // Google Drive
-    'gd': function (args) { simpleSearch('drive.google.com', '/drive/search?q=', encodeArgs(args)); },
+    'gd': function (args) { redirect('drive.google.com', '/drive/search?q=', undefined, encodeArgs(args)); },
     // Google Calendar
-    'gc': function (args) { simpleSearch('calendar.google.com', '', []); },
+    'gc': function (args) { redirect('calendar.google.com', '', '', undefined); },
     // Google Images
-    'img': function (args) { simpleSearch('google.com', '/search?tbm=isch&q=', encodeArgs(args)); },
+    'img': function (args) { redirect('google.com', '/search?tbm=isch&q=', undefined, encodeArgs(args)); },
     // Inbox
-    'i': function (args) { simpleSearch('inbox.google.com', '/search/', encodeArgs(args)); },
+    'i': function (args) { redirect('inbox.google.com', '/search/', undefined, encodeArgs(args)); },
     // Keep
-    'k': function (args) { simpleSearch('keep.google.com', '/#search/text=', encodeArgs(args)); },
+    'k': function (args) { redirect('keep.google.com', '/#search/text=', undefined, encodeArgs(args)); },
     // Dictionary
-    'dict': function (args) { simpleSearch('dictionary.com', '/browse/', encodeArgs(args)); },
+    'dict': function (args) { redirect('dictionary.com', '/browse/', undefined, encodeArgs(args)); },
     // Thesaurus
-    'thes': function (args) { simpleSearch('thesaurus.com', '/browse/', encodeArgs(args)); },
+    'thes': function (args) { redirect('thesaurus.com', '/browse/', undefined, encodeArgs(args)); },
     // Help
     'help': function (args) { redirect('github.com/koryschneider/mintab#readme', true); },
     // Settings
@@ -113,10 +112,16 @@ var COMMANDS = {
                         if (validHex(args[1])) {
                             SETTINGS['bgColor'] = args[1];
                         }
+                        else {
+                            displayMessage('Error: invalid hex value', 5000);
+                        }
                     }
                     else if (args[0] == 'textColor') {
                         if (validHex(args[1])) {
                             SETTINGS['textColor'] = args[1];
+                        }
+                        else {
+                            displayMessage('Error: invalid hex value', 5000);
                         }
                     }
                     break;
@@ -167,23 +172,25 @@ function interpret() {
         COMMANDS[SETTINGS['defaultCommand']](args);
     }
 }
-function simpleSearch(url, search, args) {
-    var destination = url;
-    if (args.length > 0 && args[0] !== '') {
-        destination += search + args[0];
-    }
-    redirect(destination);
-}
-function redirect(url, newtab) {
+function redirect(url, search, query, args, newtab) {
     if (newtab === void 0) { newtab = false; }
-    url = (/(http(s)?:\/\/.)/.test(url))
-        ? url
-        : 'http://' + url;
+    var destination = url;
+    destination = (/(http(s)?:\/\/.)/.test(destination))
+        ? destination
+        : 'http://' + destination;
+    if (query) {
+        destination += search + query;
+    }
+    else if (args) {
+        if (args.length > 0 && args[0] !== '') {
+            destination += search + args[0];
+        }
+    }
     if (newtab) {
-        window.open(url).focus();
+        window.open(destination).focus();
     }
     else {
-        window.location.href = url;
+        window.location.href = destination;
     }
     return false;
 }
