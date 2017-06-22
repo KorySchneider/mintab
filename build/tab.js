@@ -105,6 +105,9 @@ var COMMANDS = {
                         if (Object.keys(COMMANDS).includes(args[1])) {
                             SETTINGS['defaultCommand'] = args[1];
                         }
+                        else {
+                            displayMessage('Error: command "' + args[1] + '" not found; default command not changed', 5000);
+                        }
                     }
                     else if (args[0] == 'bgColor') {
                         if (validHex(args[1])) {
