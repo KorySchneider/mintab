@@ -12,7 +12,39 @@ const COMMANDS = {
   'g': (args) => { simpleSearch('google.com', '/search?q=', encodeArgs(args)) },
 
   //Reddit
-  'r': (args) => { simpleSearch('reddit.com', '/r/', args) },
+  'r': (args) => {
+    const url = 'reddit.com'; const search = '/r/';
+    let query = (args.length > 0) ? args[0] : '';
+
+    const validSort = (arg) => { return (['hot', 'new', 'rising', 'controversial', 'top', 'gilded', 'wiki', 'promoted'].includes(arg)) };
+    const validRange = (arg) => { return (['day', 'week', 'month', 'year', 'all'].includes(arg)) };
+
+    switch(args.length) {
+      case 0:
+        redirect(url);
+        break;
+      case 1:
+        simpleSearch(url, search, args);
+        break;
+      case 2:
+        query += (validSort(args[1]))
+          ? '/' + args[1]
+          : '';
+        break;
+      case 3:
+        if (['top', 'controversial'].includes(args[1])) {
+          query += (validRange(args[2]))
+            ? '/' + args[1] + '/' + args[2]
+            : '';
+        } else {
+          query += (validSort(args[1]))
+            ? '/' + args[1]
+            : '';
+        }
+        break;
+    }
+    simpleSearch(url, search, [query]);
+  },
 
   // DuckDuckGo
   'dg': (args) => { simpleSearch('duckduckgo.com', '/search?q=', encodeArgs(args)) },
