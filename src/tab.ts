@@ -127,14 +127,22 @@ const COMMANDS = {
           if (args[0] == 'defaultCommand') {
             if (Object.keys(COMMANDS).includes(args[1])) {
               SETTINGS['defaultCommand'] = args[1];
+            } else {
+              displayMessage('Error: command "' + args[1] + '" not found; default command not changed', 5000);
             }
+
           } else if (args[0] == 'bgColor') {
             if (validHex(args[1])) {
               SETTINGS['bgColor'] = args[1];
+            } else {
+              displayMessage('Error: invalid hex value', 5000);
             }
+
           } else if (args[0] == 'textColor') {
             if (validHex(args[1])) {
               SETTINGS['textColor'] = args[1];
+            } else {
+              displayMessage('Error: invalid hex value', 5000);
             }
           }
           break;
