@@ -143,7 +143,7 @@ const COMMANDS = {
   'thes': (args) => { redirect('thesaurus.com', '/browse/', undefined, encodeArgs(args)) },
 
   // Help
-  'help': (args) => { redirect('github.com/koryschneider/mintab#readme', true) },
+  'help': (args) => { redirect('github.com/koryschneider/mintab/blob/master/doc/commands.md', undefined, undefined, undefined, true) },
 
   // Settings
   'set': (args) => {

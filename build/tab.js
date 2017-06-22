@@ -127,7 +127,7 @@ var COMMANDS = {
     // Thesaurus
     'thes': function (args) { redirect('thesaurus.com', '/browse/', undefined, encodeArgs(args)); },
     // Help
-    'help': function (args) { redirect('github.com/koryschneider/mintab#readme', true); },
+    'help': function (args) { redirect('github.com/koryschneider/mintab/blob/master/doc/commands.md', undefined, undefined, undefined, true); },
     // Settings
     'set': function (args) {
         var validHex = function (v) { return /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i.test(v); };
