@@ -113,7 +113,25 @@ const COMMANDS = {
   'img': (args) => { redirect('google.com', '/search?tbm=isch&q=', undefined, encodeArgs(args)) },
 
   // Inbox
-  'i': (args) => { redirect('inbox.google.com', '/search/', undefined, encodeArgs(args)) },
+  'i': (args) => {
+    const url = 'inbox.google.com'; const search = '/search/';
+    args = encodeArgs(args);
+
+    switch(args.length) {
+      case 0:
+        redirect(url);
+        break;
+      case 1:
+        if (args[0] == 'snoozed') {
+          redirect(url + '/snoozed');
+        } else if (args[0] == 'done') {
+          redirect(url + '/done');
+        } else {
+          redirect(url, search, undefined, args);
+        }
+        break;
+    }
+  },
 
   // Keep
   'k': (args) => { redirect('keep.google.com', '/#search/text=', undefined, encodeArgs(args)) },
