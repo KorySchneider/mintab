@@ -44,7 +44,26 @@ var COMMANDS = {
     // DuckDuckGo
     'dg': function (args) { redirect('duckduckgo.com', '/?q=', undefined, encodeArgs(args)); },
     // YouTube
-    'y': function (args) { redirect('youtube.com', '/results?search_query=', undefined, encodeArgs(args)); },
+    'y': function (args) {
+        var url = 'youtube.com';
+        var search = '/results?search_query=';
+        args = encodeArgs(args);
+        switch (args.length) {
+            case 0:
+                redirect(url);
+                break;
+            case 1:
+                if (args[0] == 'subs') {
+                    redirect(url, '', '/feed/subscriptions', undefined);
+                }
+                else {
+                    redirect(url, search, undefined, args);
+                }
+                break;
+        }
+    }
+    // Amazon
+    ,
     // Amazon
     'a': function (args) { redirect('smile.amazon.com', '/s/?field-keywords=', undefined, encodeArgs(args)); },
     // Wikipedia
@@ -80,7 +99,27 @@ var COMMANDS = {
     // Google Images
     'img': function (args) { redirect('google.com', '/search?tbm=isch&q=', undefined, encodeArgs(args)); },
     // Inbox
-    'i': function (args) { redirect('inbox.google.com', '/search/', undefined, encodeArgs(args)); },
+    'i': function (args) {
+        var url = 'inbox.google.com';
+        var search = '/search/';
+        args = encodeArgs(args);
+        switch (args.length) {
+            case 0:
+                redirect(url);
+                break;
+            case 1:
+                if (args[0] == 'snoozed') {
+                    redirect(url + '/snoozed');
+                }
+                else if (args[0] == 'done') {
+                    redirect(url + '/done');
+                }
+                else {
+                    redirect(url, search, undefined, args);
+                }
+                break;
+        }
+    },
     // Keep
     'k': function (args) { redirect('keep.google.com', '/#search/text=', undefined, encodeArgs(args)); },
     // Dictionary
