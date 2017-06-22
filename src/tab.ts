@@ -50,7 +50,23 @@ const COMMANDS = {
   'dg': (args) => { redirect('duckduckgo.com', '/?q=', undefined, encodeArgs(args)) },
 
   // YouTube
-  'y': (args) => { redirect('youtube.com', '/results?search_query=', undefined, encodeArgs(args)) },
+  'y': (args) => {
+    const url = 'youtube.com'; const search = '/results?search_query=';
+    args = encodeArgs(args);
+
+    switch(args.length) {
+      case 0:
+        redirect(url);
+        break;
+      case 1:
+        if (args[0] == 'subs') {
+          redirect(url, '', '/feed/subscriptions', undefined);
+        } else {
+          redirect(url, search, undefined, args)
+        }
+        break;
+    }
+  }
 
   // Amazon
   'a': (args) => { redirect('smile.amazon.com', '/s/?field-keywords=', undefined, encodeArgs(args)) },
