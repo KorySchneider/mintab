@@ -59,7 +59,22 @@ const COMMANDS = {
   'w': (args) => { simpleSearch('wikipedia.org', '/w/index.php?title=Special:Search&search=', encodeArgs(args, 1)) },
 
   // GitHub
-  'gh': (args) => { simpleSearch('github.com', '/search?q=', encodeArgs(args)) },
+  //'gh': (args) => { simpleSearch('github.com', '/search?q=', encodeArgs(args)) },
+  'gh': (args) => {
+    const url = 'github.com'; const search = '/';
+    args = encodeArgs(args);
+    let query = (args.length > 0) ? args[0] : '';
+
+    switch(args.length) {
+      case 0:
+        redirect(url);
+        break;
+      case 2:
+        query += '/' + args[1];
+        break;
+    }
+    simpleSearch(url, search, [query]);
+  },
 
   // Wolfram Alpha
   'wa': (args) => { simpleSearch('wolframalpha.com', '/input/?i=', encodeArgs(args)) },
