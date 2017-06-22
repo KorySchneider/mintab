@@ -1,3 +1,5 @@
+## Basics
+
 General syntax: `command ; argument ; argument2 ; ...`
 
 Enter a command by itself to go to the corresponding website, or add a
@@ -11,7 +13,7 @@ command is Google (use the `set` command to change this).
 
 Enter a URL by itself to go to it.
 
-## Contents:
+## Contents
  - Non-shortcut commands
    - [set](#set)
    - [help](#help)
@@ -35,7 +37,7 @@ Enter a URL by itself to go to it.
    - [Google Images](#google-images)
    - [Google Calendar](#google-calendar)
 
-## Non-shortcut commands:
+## Non-shortcut commands
 
 ### Set
 `set ;setting [;value]`
@@ -51,7 +53,7 @@ Examples: `set;bgColor;#282828`, `set;defaultCommand;dg`
 ### Help
 `help` - Opens this page.
 
-## Shortcut commands:
+## Shortcut commands
 
 ### Google
 `g [;query]`
