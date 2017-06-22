@@ -8,7 +8,39 @@ var COMMANDS = {
     // Google
     'g': function (args) { simpleSearch('google.com', '/search?q=', encodeArgs(args)); },
     //Reddit
-    'r': function (args) { simpleSearch('reddit.com', '/r/', args); },
+    'r': function (args) {
+        var url = 'reddit.com';
+        var search = '/r/';
+        var query = (args.length > 0) ? args[0] : '';
+        var validSort = function (arg) { return (['hot', 'new', 'rising', 'controversial', 'top', 'gilded', 'wiki', 'promoted'].includes(arg)); };
+        var validRange = function (arg) { return (['day', 'week', 'month', 'year', 'all'].includes(arg)); };
+        switch (args.length) {
+            case 0:
+                redirect(url);
+                break;
+            case 1:
+                simpleSearch(url, search, args);
+                break;
+            case 2:
+                query += (validSort(args[1]))
+                    ? '/' + args[1]
+                    : '';
+                break;
+            case 3:
+                if (['top', 'controversial'].includes(args[1])) {
+                    query += (validRange(args[2]))
+                        ? '/' + args[1] + '/' + args[2]
+                        : '';
+                }
+                else {
+                    query += (validSort(args[1]))
+                        ? '/' + args[1]
+                        : '';
+                }
+                break;
+        }
+        simpleSearch(url, search, [query]);
+    },
     // DuckDuckGo
     'dg': function (args) { simpleSearch('duckduckgo.com', '/search?q=', encodeArgs(args)); },
     // YouTube
@@ -18,7 +50,22 @@ var COMMANDS = {
     // Wikipedia
     'w': function (args) { simpleSearch('wikipedia.org', '/w/index.php?title=Special:Search&search=', encodeArgs(args, 1)); },
     // GitHub
-    'gh': function (args) { simpleSearch('github.com', '/search?q=', encodeArgs(args)); },
+    //'gh': (args) => { simpleSearch('github.com', '/search?q=', encodeArgs(args)) },
+    'gh': function (args) {
+        var url = 'github.com';
+        var search = '/';
+        args = encodeArgs(args);
+        var query = (args.length > 0) ? args[0] : '';
+        switch (args.length) {
+            case 0:
+                redirect(url);
+                break;
+            case 2:
+                query += '/' + args[1];
+                break;
+        }
+        simpleSearch(url, search, [query]);
+    },
     // Wolfram Alpha
     'wa': function (args) { simpleSearch('wolframalpha.com', '/input/?i=', encodeArgs(args)); },
     // Netflix
@@ -130,8 +177,7 @@ function redirect(url, newtab) {
         ? url
         : 'http://' + url;
     if (newtab) {
-        var win = window.open(url);
-        win.focus();
+        window.open(url).focus();
     }
     else {
         window.location.href = url;
