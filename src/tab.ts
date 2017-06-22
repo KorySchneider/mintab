@@ -208,12 +208,10 @@ function redirect(url: string, newtab: boolean = false): boolean {
     : 'http://' + url;
 
   if (newtab) {
-    let win = window.open(url);
-    win.focus()
+    window.open(url).focus();
   } else {
     window.location.href = url;
   }
-
   return false;
 }
 
