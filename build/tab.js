@@ -268,12 +268,24 @@ function applySettings() {
 function saveSettings() {
     localStorage.setItem('settings', JSON.stringify(SETTINGS));
 }
+// Timer must be global in order to cancel timeout
+var timer = function (ms) {
+    setTimeout(function () {
+        $('#message').html('');
+    }, ms);
+};
 function displayMessage(msg, timeMs) {
-    $('#message').text(msg);
+    var msgDiv = $('#message');
+    // Clear any existing message
+    if (msgDiv.val() !== '') {
+        msgDiv.html('');
+        clearTimeout(timer);
+    }
+    // Display message
+    msgDiv.text(msg);
+    // Set timer
     if (timeMs > 0) {
-        setTimeout(function () {
-            $('#message').html('');
-        }, timeMs);
+        timer(timeMs);
     }
 }
 function handleKeyDown(e) {
