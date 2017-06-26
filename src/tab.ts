@@ -297,12 +297,9 @@ function saveSettings(): void {
 let timer; // Timer must be global in order to cancel timeout
 function displayMessage(msg: string, timeMs: number): void {
   const msgDiv = $('#message');
-  timer = setTimeout(() => {
-    msgDiv.html('');
-  }, timeMs);
 
   // Clear any existing message
-  if (msgDiv.val() !== '') {
+  if (timer) {
     msgDiv.html('');
     clearTimeout(timer);
   }
@@ -311,9 +308,9 @@ function displayMessage(msg: string, timeMs: number): void {
   msgDiv.text(msg);
 
   // Set timer
-  if (timeMs > 0) {
-    timer(timeMs);
-  }
+  timer = setTimeout(() => {
+    msgDiv.html('');
+  }, timeMs);
 }
 
 function handleKeyDown(e): void {
