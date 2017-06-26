@@ -61,9 +61,7 @@ var COMMANDS = {
                 }
                 break;
         }
-    }
-    // Amazon
-    ,
+    },
     // Amazon
     'a': function (args) { redirect('smile.amazon.com', '/s/?field-keywords=', undefined, encodeArgs(args)); },
     // Wikipedia
@@ -268,14 +266,12 @@ function applySettings() {
 function saveSettings() {
     localStorage.setItem('settings', JSON.stringify(SETTINGS));
 }
-// Timer must be global in order to cancel timeout
-var timer = function (ms) {
-    setTimeout(function () {
-        $('#message').html('');
-    }, ms);
-};
+var timer; // Timer must be global in order to cancel timeout
 function displayMessage(msg, timeMs) {
     var msgDiv = $('#message');
+    timer = setTimeout(function () {
+        msgDiv.html('');
+    }, timeMs);
     // Clear any existing message
     if (msgDiv.val() !== '') {
         msgDiv.html('');

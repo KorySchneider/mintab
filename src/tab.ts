@@ -294,14 +294,12 @@ function saveSettings(): void {
   localStorage.setItem('settings', JSON.stringify(SETTINGS));
 }
 
-// Timer must be global in order to cancel timeout
-const timer = (ms) => {
-  setTimeout(() => {
-    $('#message').html('');
-  }, ms);
-};
+let timer; // Timer must be global in order to cancel timeout
 function displayMessage(msg: string, timeMs: number): void {
   const msgDiv = $('#message');
+  timer = setTimeout(() => {
+    msgDiv.html('');
+  }, timeMs);
 
   // Clear any existing message
   if (msgDiv.val() !== '') {
