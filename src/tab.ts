@@ -66,7 +66,7 @@ const COMMANDS = {
         }
         break;
     }
-  }
+  },
 
   // Amazon
   'a': (args) => { redirect('smile.amazon.com', '/s/?field-keywords=', undefined, encodeArgs(args)) },
