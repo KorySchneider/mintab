@@ -183,7 +183,7 @@ const COMMANDS = {
     } else if (args[0] == 'defaults') {
       localStorage.removeItem('settings');
       loadSettings();
-      displayMessage('Settings reset to defaults', 6000);
+      displayMessage('Settings reset to defaults', 5000);
     }
     saveSettings();
     applySettings();
