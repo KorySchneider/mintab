@@ -1,4 +1,4 @@
-import subprocess
+import subprocess, os, shutil
 
 output_file = 'index.html'
 output = ''
@@ -7,6 +7,10 @@ def write(output):
     with open(output_file, 'r+') as f:
         f.truncate()
         f.write(output)
+
+# set up
+if not os.path.exists('build/'):
+    os.makedirs('build/')
 
 # autoprefix css
 autoprefix_cmd = 'postcss src/style.css --use autoprefixer --dir build/'
@@ -41,3 +45,6 @@ minify_command = 'html-minifier --collapse-boolean-attributes --collapse-whitesp
 mini_output = subprocess.run(minify_command.split(), stdout=subprocess.PIPE).stdout.decode('utf-8')
 write(mini_output)
 print('✔ Minified index.html')
+
+# clean up
+shutil.rmtree('build/')
