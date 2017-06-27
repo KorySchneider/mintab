@@ -36,7 +36,9 @@ Enter a URL by itself to go to it.
    - [Google Images](#google-images)
    - [Google Calendar](#google-calendar)
 
-#### Set
+---
+
+#### set
 `set ;setting [;value]`
 
  - **setting** - One of: `defaultCommand`, `bgColor`, `textColor`. If no value
@@ -47,18 +49,29 @@ Enter a URL by itself to go to it.
 
 Examples: `set;bgColor;#282828`, `set;defaultCommand;dg`
 
-#### Help
+---
+
+#### help
 `help` - Opens this page.
+
+
+---
 
 #### Google
 `g [;query]`
 
  - **query** - Search Google for `query`.
 
+
+---
+
 #### DuckDuckGo
 `dg [;query]`
 
  - **query** - Search DuckDuckGo for `query`.
+
+
+---
 
 #### Reddit
 `r [;subreddit] [;sort] [;range]`
@@ -70,17 +83,26 @@ Examples: `set;bgColor;#282828`, `set;defaultCommand;dg`
 
 Example: `r;linux;top;week` goes to `reddit.com/r/linux/top?t=week`
 
+
+---
+
 #### GitHub
 `gh [;user] [;repository]`
 
  - **user** - A GitHub username.
  - **repository** - A repository name, owned by `user`.
 
+
+---
+
 #### YouTube
 `y [;query | subs]`
 
  - **query** - Search YouTube for `query`.
  - **subs** - Go to your subscriptions feed.
+
+
+---
 
 #### Inbox
 `i [;query | snoozed | done]`
@@ -89,38 +111,74 @@ Example: `r;linux;top;week` goes to `reddit.com/r/linux/top?t=week`
  - **snoozed** - Go to your snoozed emails.
  - **done** - Go to your done (archived) emails.
 
+
+---
+
 #### Netflix
 `n [;query]`
+
+
+---
 
 #### Amazon
 `a [;query]`
 
+
+---
+
 #### Wikipedia
 `w [;query]`
+
+
+---
 
 #### Dictionary
 `dict [;query]`
 
+
+---
+
 #### Thesaurus
 `thes [;query]`
+
+
+---
 
 #### Wolfram Alpha
 `wa [;query]`
 
+
+---
+
 #### Internet Movie Database
 `imdb [;query]`
+
+
+---
 
 #### Google Maps
 `gm [;query]`
 
+
+---
+
 #### Google Drive
 `gd [;query]`
+
+
+---
 
 #### Google Keep
 `k [;query]`
 
+
+---
+
 #### Google Images
 `img;query`
+
+
+---
 
 #### Google Calendar
 `gc`
