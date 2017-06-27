@@ -1,14 +1,13 @@
-## Basics
+## Usage
 
-General syntax: `command ; argument ; argument2 ; ...`
+General syntax: separate commands and arguments with semicolons.
+
+e.g. `command ; argument1 ; argument2 ; ...`
+
+Leading and trailing spaces will be stripped, so `y ; cats` will do the same thing as `y;cats`.
 
 Enter a command by itself to go to the corresponding website, or add a
-query to search the site.
-
-Arguments are separated by semicolons (`;`). Leading/trailing spaces will be
-stripped, so `y; cats` will do the same thing as `y;cats`.
-
-If no command is specified, the default command will execute. The default, default
+query to search the site. If no command is specified, the default command will execute. The default, default
 command is Google (use the `set` command to change this).
 
 Enter a URL by itself to go to it.
@@ -37,9 +36,7 @@ Enter a URL by itself to go to it.
    - [Google Images](#google-images)
    - [Google Calendar](#google-calendar)
 
-## Non-shortcut commands
-
-### Set
+#### Set
 `set ;setting [;value]`
 
  - **setting** - One of: `defaultCommand`, `bgColor`, `textColor`. If no value
@@ -50,22 +47,20 @@ Enter a URL by itself to go to it.
 
 Examples: `set;bgColor;#282828`, `set;defaultCommand;dg`
 
-### Help
+#### Help
 `help` - Opens this page.
 
-## Shortcut commands
-
-### Google
+#### Google
 `g [;query]`
 
  - **query** - Search Google for `query`.
 
-### DuckDuckGo
+#### DuckDuckGo
 `dg [;query]`
 
  - **query** - Search DuckDuckGo for `query`.
 
-### Reddit
+#### Reddit
 `r [;subreddit] [;sort] [;range]`
 
  - **subreddit** - Go to a subreddit.
@@ -75,57 +70,57 @@ Examples: `set;bgColor;#282828`, `set;defaultCommand;dg`
 
 Example: `r;linux;top;week` goes to `reddit.com/r/linux/top?t=week`
 
-### GitHub
+#### GitHub
 `gh [;user] [;repository]`
 
  - **user** - A GitHub username.
  - **repository** - A repository name, owned by `user`.
 
-### YouTube
+#### YouTube
 `y [;query | subs]`
 
  - **query** - Search YouTube for `query`.
  - **subs** - Go to your subscriptions feed.
 
-### Inbox
+#### Inbox
 `i [;query | snoozed | done]`
 
  - **query** - Search your inbox for `query`.
  - **snoozed** - Go to your snoozed emails.
  - **done** - Go to your done (archived) emails.
 
-### Netflix
+#### Netflix
 `n [;query]`
 
-### Amazon
+#### Amazon
 `a [;query]`
 
-### Wikipedia
+#### Wikipedia
 `w [;query]`
 
-### Dictionary
+#### Dictionary
 `dict [;query]`
 
-### Thesaurus
+#### Thesaurus
 `thes [;query]`
 
-### Wolfram Alpha
+#### Wolfram Alpha
 `wa [;query]`
 
-### Internet Movie Database
+#### Internet Movie Database
 `imdb [;query]`
 
-### Google Maps
+#### Google Maps
 `gm [;query]`
 
-### Google Drive
+#### Google Drive
 `gd [;query]`
 
-### Google Keep
+#### Google Keep
 `k [;query]`
 
-### Google Images
+#### Google Images
 `img;query`
 
-### Google Calendar
+#### Google Calendar
 `gc`
