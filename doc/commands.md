@@ -13,11 +13,11 @@ command is Google (use the `set` command to change this).
 
 Enter a URL by itself to go to it.
 
-## Contents
- - Non-shortcut commands
+## Commands
+ - Builtin
    - [set](#set)
    - [help](#help)
- - Commands
+ - Websites
    - [Google](#google)
    - [DuckDuckGo](#duckduckgo)
    - [Reddit](#reddit)
