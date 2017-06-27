@@ -117,68 +117,79 @@ Example: `r;linux;top;week` goes to `reddit.com/r/linux/top?t=week`
 #### Netflix
 `n [;query]`
 
+ - **query** - Search Netflix for `query`.
 
 ---
 
 #### Amazon
 `a [;query]`
 
+ - **query** - Search Amazon for `query`.
 
 ---
 
 #### Wikipedia
 `w [;query]`
 
+ - **query** - Search Wikipedia for `query`.
 
 ---
 
 #### Dictionary
 `dict [;query]`
 
+ - **query** - Search dictionary.com for `query`.
 
 ---
 
 #### Thesaurus
 `thes [;query]`
 
+ - **query** - Search thesaurus.com for `query`.
 
 ---
 
 #### Wolfram Alpha
 `wa [;query]`
 
+ - **query** - Search Wolfram Alpha for `query`.
 
 ---
 
 #### Internet Movie Database
 `imdb [;query]`
 
+ - **query** - Search Internet Movie Database for `query`.
 
 ---
 
 #### Google Maps
 `gm [;query]`
 
+ - **query** - Search Google Maps for `query`.
 
 ---
 
 #### Google Drive
 `gd [;query]`
 
+ - **query** - Search Google Drive for `query`.
 
 ---
 
 #### Google Keep
 `k [;query]`
 
+ - **query** - Search Google Keep for `query`.
 
 ---
 
 #### Google Images
-`img;query`
+`img [;query]`
 
+ - **query** - Search Google Images for `query`.
 
 ---
 
 #### Google Calendar
-`gc`
+`gc` - Go to Google Calendar
