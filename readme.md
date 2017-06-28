@@ -4,6 +4,6 @@
 a _really_ minimal [startpage][mintab]
 
 ### How
-See [here](doc/commands.md) for a list of commands and how they work.
+see [this page](doc/commands.md) for instructions
 
 [mintab]: https://koryschneider.github.io/mintab
