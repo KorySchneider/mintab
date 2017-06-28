@@ -208,16 +208,14 @@ function interpret(): void {
   }
 
   // Parse & format input
-  let args: Array<string> = input.split(';');
-  let command: string = args[0].trim();
+  const args: Array<string> = input.split(';');
+  const command: string = args[0].trim();
 
   for (let i=0; i < args.length; i++) {
     args[i] = args[i].trim();
   }
 
-  // Execute
   let validCommand: boolean = false;
-
   let keys = Object.keys(COMMANDS);
   for (let i=0; i < keys.length; i++) {
     if (command == keys[i]) {
@@ -225,6 +223,7 @@ function interpret(): void {
     }
   }
 
+  // Execute
   if (validCommand) {
     args = args.slice(1, args.length);
     COMMANDS[command](args);
