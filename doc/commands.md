@@ -4,13 +4,14 @@ General syntax: separate commands and arguments with semicolons.
 
 e.g. `command ; argument1 ; argument2 ; ...`
 
-Leading and trailing spaces will be stripped, so `y ; cats` will do the same thing as `y;cats`.
+Leading and trailing spaces will be stripped, so `y ; cats`, `y;cats` and `y; cats` will all do the same
+thing (search YouTube for "cats").
 
-Enter a command by itself to go to the corresponding website, or add a
-query to search the site. If no command is specified, the default command will execute. The default, default
-command is Google (use the `set` command to change this).
+Enter a command by itself to go to the corresponding website, or add a query to search the site. If no
+command is specified, the default command will execute. The default, default command is Google
+(use the `set` command to change this).
 
-Enter a URL by itself to go to it.
+Enter a link to go to it.
 
 ## Commands
  - Builtin
