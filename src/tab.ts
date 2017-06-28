@@ -234,11 +234,9 @@ function interpret(): void {
 }
 
 function redirect(url: string, search?: string, query?: string, args?: Array<string>, newtab: boolean = false): boolean {
-  let destination = url;
-
-  destination = (/(http(s)?:\/\/.)/.test(destination))
-    ? destination
-    : 'http://' + destination;
+  let destination = (/(http(s)?:\/\/.)/.test(destination))
+    ? url
+    : 'http://' + url;
 
   if (query) {
     destination += search + query;
