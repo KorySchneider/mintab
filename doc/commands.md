@@ -2,7 +2,7 @@
 
 General syntax: separate commands and arguments with semicolons.
 
-e.g. `command ; argument1 ; argument2 ; ...`
+e.g. `command ; argument [; optional argument]`
 
 Leading and trailing spaces will be stripped, so `y ; cats`, `y;cats` and `y; cats` will all do the same
 thing (search YouTube for "cats").
