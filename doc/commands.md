@@ -13,6 +13,15 @@ command is specified, the default command will execute. The default, default com
 
 Enter a link to go to it.
 
+## Examples
+Here some sample inputs and what they do:
+
+ - `y;cats` searches YouTube for 'cats'.
+
+ - `r;askreddit` takes you to the AskReddit subreddit.
+
+ - `github.com` goes to github.com.
+
 ## Commands
  - Builtin
    - [set](#set)
