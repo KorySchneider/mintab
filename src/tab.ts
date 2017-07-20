@@ -4,7 +4,8 @@ window.onload = () => {
   loadSettings();
   applySettings();
 
-  $('body').click(() => { $('#input').focus() });
+  //$('body').click(() => { $('#input').focus() });
+  document.body.addEventListener('click', () => { document.querySelector('#input').focus(); }
 }
 
 const COMMANDS = {
@@ -191,8 +192,10 @@ const COMMANDS = {
 }
 
 function interpret(): void {
-  let input: string = <string>$('#input').val();
-  $('#input').val('');
+  //let input: string = <string>$('#input').val();
+  let input = document.querySelector('#input').value;
+  //$('#input').val('');
+  document.querySelector('#input').value = '';
 
   // Input is empty
   if (input == '') {
@@ -283,8 +286,10 @@ function loadSettings(): void {
 }
 
 function applySettings(): void {
-  $('body').css('background-color', SETTINGS['bgColor']);
-  $('body').css('color', SETTINGS['textColor']);
+  //$('body').css('background-color', SETTINGS['bgColor']);
+  //$('body').css('color', SETTINGS['textColor']);
+  document.querySelector('body').style.backgroundColor = SETTINGS['bgColor'];
+  document.querySelector('body').style.color = SETTINGS['textColor'];
 }
 
 function saveSettings(): void {
@@ -293,7 +298,8 @@ function saveSettings(): void {
 
 let timer; // Timer must be global in order to cancel timeout
 function displayMessage(msg: string, timeMs: number): void {
-  const msgDiv = $('#message');
+  //const msgDiv = $('#message');
+  const msgDiv = document.querySelector('#message');
 
   // Clear any existing message
   if (timer) {
@@ -302,11 +308,13 @@ function displayMessage(msg: string, timeMs: number): void {
   }
 
   // Display message
-  msgDiv.text(msg);
+  //msgDiv.text(msg);
+  msgDiv.innerHTML = msg;
 
   // Set timer
   timer = setTimeout(() => {
-    msgDiv.html('');
+    //msgDiv.html('');
+    msgDiv.innerHTML = '';
   }, timeMs);
 }
 
