@@ -293,12 +293,11 @@ function saveSettings(): void {
 
 let timer; // Timer must be global in order to cancel timeout
 function displayMessage(msg: string, timeMs: number): void {
-  //const msgDiv = $('#message');
   const msgDiv = document.querySelector('#message');
 
   // Clear any existing message
   if (timer) {
-    msgDiv.html('');
+    msgDiv.innerHTML = '';
     clearTimeout(timer);
   }
 
