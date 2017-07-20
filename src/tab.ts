@@ -4,7 +4,6 @@ window.onload = () => {
   loadSettings();
   applySettings();
 
-  //$('body').click(() => { $('#input').focus() });
   document.body.addEventListener('click', () => { document.querySelector('#input').focus(); }
 }
 
@@ -192,9 +191,7 @@ const COMMANDS = {
 }
 
 function interpret(): void {
-  //let input: string = <string>$('#input').val();
   let input = document.querySelector('#input').value;
-  //$('#input').val('');
   document.querySelector('#input').value = '';
 
   // Input is empty
@@ -286,8 +283,6 @@ function loadSettings(): void {
 }
 
 function applySettings(): void {
-  //$('body').css('background-color', SETTINGS['bgColor']);
-  //$('body').css('color', SETTINGS['textColor']);
   document.querySelector('body').style.backgroundColor = SETTINGS['bgColor'];
   document.querySelector('body').style.color = SETTINGS['textColor'];
 }
@@ -308,12 +303,10 @@ function displayMessage(msg: string, timeMs: number): void {
   }
 
   // Display message
-  //msgDiv.text(msg);
   msgDiv.innerHTML = msg;
 
   // Set timer
   timer = setTimeout(() => {
-    //msgDiv.html('');
     msgDiv.innerHTML = '';
   }, timeMs);
 }
