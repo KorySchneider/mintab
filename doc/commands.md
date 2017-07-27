@@ -97,11 +97,10 @@ Example: `r;linux;top;week` goes to `reddit.com/r/linux/top?t=week`
 ---
 
 #### GitHub
-`gh [;user [;repo]] [;new]`
+`gh [;github location]`
 
- - **user** - A GitHub username. Takes you to that users profile page.
-   - **repo** - A repository name, owned by `user`.
- - **new** - Create a new GitHub repository.
+ - **github location** - Anything that comes after `github.com`.
+   - For example, `gh;koryschneider/mintab`
 
 
 ---
