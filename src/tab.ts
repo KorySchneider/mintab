@@ -75,21 +75,7 @@ const COMMANDS = {
   'w': (args) => { redirect('wikipedia.org', '/w/index.php?title=Special:Search&search=', undefined, encodeArgs(args, 1)) },
 
   // GitHub
-  'gh': (args) => {
-    const url = 'github.com'; const search = '/';
-    args = encodeArgs(args);
-    let query = (args.length > 0) ? args[0] : '';
-
-    switch(args.length) {
-      case 0:
-        redirect(url);
-        break;
-      case 2:
-        query += '/' + args[1];
-        break;
-    }
-    redirect(url, search, query, undefined);
-  },
+  'gh': (args) => { redirect('github.com', '/', undefined, args) },
 
   // Wolfram Alpha
   'wa': (args) => { redirect('wolframalpha.com', '/input/?i=', undefined, encodeArgs(args)) },
