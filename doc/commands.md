@@ -1,28 +1,27 @@
 ## Usage
 
-General syntax: separate commands and arguments with semicolons.
+Type a command, then optionally add arguments (separrated by semicolons). Commands are shortcuts for websites; enter a command by itself to go to the corresponding website or add arguments to quickly get to traverse the site.
 
-e.g. `command ; argument [; optional argument]`
+Some examples:
+
+ - `y;cats` Search YouTube for 'cats'
+ 
+ - `github.com` Go to github.com
+
+ - `r;dadjokes;top` Go to the top posts of the DadJokes subreddit
 
 Leading and trailing spaces will be stripped, so `y ; cats`, `y;cats` and `y; cats` will all do the same
 thing (search YouTube for "cats").
 
-Enter a command by itself to go to the corresponding website, or add a query to search the site. If no
-command is specified, the default command will execute. The default, default command is Google
+If no command is specified, the default command will execute. The default, default command is Google
 (use the `set` command to change this).
 
-Enter a link to go to it.
-
-## Examples
-Here some sample inputs and what they do:
-
- - `y;cats` searches YouTube for 'cats'.
-
- - `r;askreddit` takes you to the AskReddit subreddit.
-
- - `github.com` goes to github.com.
-
 ## Commands
+
+Here are all the commands and what they do.
+
+Arguments in [brackets] are optional. Vertical pipes (`|`) mean 'or'.
+
  - Builtin
    - [set](#set)
    - [help](#help)
