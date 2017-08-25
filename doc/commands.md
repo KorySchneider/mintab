@@ -5,7 +5,7 @@ Type a command, then optionally add arguments (separrated by semicolons). Comman
 Some examples:
 
  - `y;cats` Search YouTube for 'cats'
- 
+
  - `github.com` Go to github.com
 
  - `r;dadjokes;top` Go to the top posts of the DadJokes subreddit
