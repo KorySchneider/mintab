@@ -177,7 +177,7 @@ const COMMANDS = {
 }
 
 function interpret(): void {
-  let input = document.querySelector('#input').value;
+  let input = document.querySelector('#input').value.trim();
   document.querySelector('#input').value = '';
 
   // Input is empty
@@ -219,9 +219,13 @@ function interpret(): void {
 }
 
 function redirect(url: string, search?: string, query?: string, args?: Array<string>, newtab: boolean = false): boolean {
-  let destination = (/(http(s)?:\/\/.)/.test(destination))
-    ? url
-    : 'http://' + url;
+  let destination: string;
+
+  if (!/(http(s)?:\/\/.)/.test(url)) {
+    destination = 'http://' + url;
+  } else {
+    destination = url;
+  }
 
   if (query) {
     destination += search + query;
