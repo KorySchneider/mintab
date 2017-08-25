@@ -4,8 +4,7 @@
   "description": "a startpage",
   "main": "index.html",
   "scripts": {
-    "build": "python3 build.py",
-    "deploy": "git checkout gh-pages && git pull && git merge master && git push && git checkout master"
+    "build": "python3 build.py"
   },
   "repository": {
     "type": "git",
