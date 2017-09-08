@@ -1,20 +1,22 @@
 ## Usage
 
-Type a command, then optionally add arguments (separrated by semicolons). Commands are shortcuts for websites; enter a command by itself to go to the corresponding website or add arguments to quickly get to traverse the site.
+Type a command, then optionally add arguments (separrated by semicolons).
+Commands are shortcuts for websites; enter a command by itself to go to the
+corresponding website or add arguments to quickly get to traverse the site.
 
 Some examples:
 
  - `y;cats` Search YouTube for 'cats'
 
- - `github.com` Go to github.com
-
  - `r;dadjokes;top` Go to the top posts of the DadJokes subreddit
 
-Leading and trailing spaces will be stripped, so `y ; cats`, `y;cats` and `y; cats` will all do the same
-thing (search YouTube for "cats").
+ - `example.com` Go to example.com
 
-If no command is specified, the default command will execute. The default, default command is Google
-(use the `set` command to change this).
+Leading and trailing spaces will be stripped, so `y ; cats`, `y;cats` and `y;
+cats` will all do the same thing (search YouTube for "cats").
+
+If no command is specified, the default command will execute. The default,
+default command is Google (use the `set` command to change this).
 
 ## Commands
 
@@ -30,6 +32,7 @@ Arguments in [brackets] are optional. Vertical pipes (`|`) mean 'or'.
    - [DuckDuckGo](#duckduckgo)
    - [Reddit](#reddit)
    - [GitHub](#github)
+   - [GitHub Gist](#github-gist)
    - [YouTube](#youtube)
    - [Inbox](#inbox)
    - [Netflix](#netflix)
@@ -56,7 +59,7 @@ Arguments in [brackets] are optional. Vertical pipes (`|`) mean 'or'.
    shortcut (e.g. `y`) for `defaultCommand`.
  - `set;defaults` will restore default values for all options.
 
-Examples: `set;bgColor;#282828`, `set;defaultCommand;dg`
+For example: `set;bgColor;#282828` or `set;defaultCommand;dg`
 
 ---
 
@@ -90,16 +93,25 @@ Examples: `set;bgColor;#282828`, `set;defaultCommand;dg`
  `wiki`, `promoted`.
   - **range** - One of: `day`, `week`, `month`, `year`, `all`.
 
-Example: `r;linux;top;week` goes to `reddit.com/r/linux/top?t=week`
+For example: `r;linux;top;week` goes to `reddit.com/r/linux/top?t=week`
 
 
 ---
 
 #### GitHub
-`gh [;github location]`
+`gh [;github path]`
 
- - **github location** - Anything that comes after `github.com`.
-   - For example, `gh;koryschneider/mintab`
+ - **github path** - Anything that normally comes after `github.com`.
+
+For example: `gh;koryschneider/mintab` or `gh;new`
+
+
+---
+
+#### GitHub Gist
+`gist [;query]`
+
+ - **query** - Search Gists for `query`.
 
 
 ---
