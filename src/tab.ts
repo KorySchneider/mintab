@@ -13,7 +13,7 @@ const COMMANDS = {
 
   //Reddit
   'r': (args) => {
-    const url = 'reddit.com'; const search = '/r/';
+    const url = 'https://reddit.com', search = '/r/';
     let query = (args.length > 0) ? args[0] : '';
 
     const validSort = (arg) => { return (['hot', 'new', 'rising', 'controversial', 'top', 'gilded', 'wiki', 'promoted'].includes(arg)) };
@@ -47,11 +47,11 @@ const COMMANDS = {
   },
 
   // DuckDuckGo
-  'dg': (args) => { redirect('duckduckgo.com', '/?q=', undefined, encodeArgs(args)) },
+  'dg': (args) => { redirect('https://duckduckgo.com', '/?q=', undefined, encodeArgs(args)) },
 
   // YouTube
   'y': (args) => {
-    const url = 'youtube.com'; const search = '/results?search_query=';
+    const url = 'https://youtube.com'; const search = '/results?search_query=';
     args = encodeArgs(args);
 
     switch(args.length) {
@@ -69,41 +69,41 @@ const COMMANDS = {
   },
 
   // Amazon
-  'a': (args) => { redirect('smile.amazon.com', '/s/?field-keywords=', undefined, encodeArgs(args)) },
+  'a': (args) => { redirect('https://smile.amazon.com', '/s/?field-keywords=', undefined, encodeArgs(args)) },
 
   // Wikipedia
-  'w': (args) => { redirect('wikipedia.org', '/w/index.php?title=Special:Search&search=', undefined, encodeArgs(args, 1)) },
+  'w': (args) => { redirect('https://wikipedia.org', '/w/index.php?title=Special:Search&search=', undefined, encodeArgs(args, 1)) },
 
   // GitHub
-  'gh': (args) => { redirect('github.com', '/', undefined, args) },
+  'gh': (args) => { redirect('https://github.com', '/', undefined, args) },
 
   // GitHub Gist
-  'gist': (args) => { redirect('gist.github.com', '/search?q=', undefined, encodeArgs(args)) },
+  'gist': (args) => { redirect('https://gist.github.com', '/search?q=', undefined, encodeArgs(args)) },
 
   // Wolfram Alpha
   'wa': (args) => { redirect('wolframalpha.com', '/input/?i=', undefined, encodeArgs(args)) },
 
   // Netflix
-  'n': (args) => { redirect('netflix.com', '/search?q=', undefined, encodeArgs(args)) },
+  'n': (args) => { redirect('https://netflix.com', '/search?q=', undefined, encodeArgs(args)) },
 
   // Internet Movie Database
   'imdb': (args) => { redirect('imdb.com', '/find?s=all&q=', undefined, encodeArgs(args)) },
 
   // Google Maps
-  'gm': (args) => { redirect('maps.google.com', '/maps?q=', undefined, encodeArgs(args)) },
+  'gm': (args) => { redirect('https://maps.google.com', '/maps?q=', undefined, encodeArgs(args)) },
 
   // Google Drive
-  'gd': (args) => { redirect('drive.google.com', '/drive/search?q=', undefined, encodeArgs(args)) },
+  'gd': (args) => { redirect('https://drive.google.com', '/drive/search?q=', undefined, encodeArgs(args)) },
 
   // Google Calendar
-  'gc': (args) => { redirect('calendar.google.com', '', '', undefined) },
+  'gc': (args) => { redirect('https://calendar.google.com', '', '', undefined) },
 
   // Google Images
-  'img': (args) => { redirect('google.com', '/search?tbm=isch&q=', undefined, encodeArgs(args)) },
+  'img': (args) => { redirect('https://google.com', '/search?tbm=isch&q=', undefined, encodeArgs(args)) },
 
   // Inbox
   'i': (args) => {
-    const url = 'inbox.google.com'; const search = '/search/';
+    const url = 'https://inbox.google.com'; const search = '/search/';
     args = encodeArgs(args);
 
     switch(args.length) {
@@ -123,7 +123,7 @@ const COMMANDS = {
   },
 
   // Keep
-  'k': (args) => { redirect('keep.google.com', '/#search/text=', undefined, encodeArgs(args)) },
+  'k': (args) => { redirect('https://keep.google.com', '/#search/text=', undefined, encodeArgs(args)) },
 
   // Dictionary
   'dict': (args) => { redirect('dictionary.com', '/browse/', undefined, encodeArgs(args)) },
@@ -132,7 +132,7 @@ const COMMANDS = {
   'thes': (args) => { redirect('thesaurus.com', '/browse/', undefined, encodeArgs(args)) },
 
   // Help
-  'help': (args) => { redirect('github.com/koryschneider/mintab/blob/master/doc/commands.md', undefined, undefined, undefined, true) },
+  'help': (args) => { redirect('https://github.com/koryschneider/mintab/blob/master/doc/commands.md', undefined, undefined, undefined, true) },
 
   // Settings
   'set': (args) => {
