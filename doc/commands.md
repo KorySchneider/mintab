@@ -27,6 +27,7 @@ Arguments in [brackets] are optional. Vertical pipes (`|`) mean 'or'.
  - Builtin
    - [set](#set)
    - [help](#help)
+   - [newtab](#new-tab)
  - Websites
    - [Google](#google)
    - [DuckDuckGo](#duckduckgo)
@@ -66,6 +67,10 @@ For example: `set;bgColor;#282828` or `set;defaultCommand;dg`
 #### help
 `help` - Opens this page.
 
+---
+
+#### new tab
+Add `;n` to the end of any command to open the result in a new tab.
 
 ---
 
@@ -74,14 +79,12 @@ For example: `set;bgColor;#282828` or `set;defaultCommand;dg`
 
  - **query** - Search Google for `query`.
 
-
 ---
 
 #### DuckDuckGo
 `dg [;query]`
 
  - **query** - Search DuckDuckGo for `query`.
-
 
 ---
 
@@ -95,7 +98,6 @@ For example: `set;bgColor;#282828` or `set;defaultCommand;dg`
 
 For example: `r;linux;top;week` goes to `reddit.com/r/linux/top?t=week`
 
-
 ---
 
 #### GitHub
@@ -105,14 +107,12 @@ For example: `r;linux;top;week` goes to `reddit.com/r/linux/top?t=week`
 
 For example: `gh;koryschneider/mintab` or `gh;new`
 
-
 ---
 
 #### GitHub Gist
 `gist [;query]`
 
  - **query** - Search Gists for `query`.
-
 
 ---
 
@@ -122,7 +122,6 @@ For example: `gh;koryschneider/mintab` or `gh;new`
  - **query** - Search YouTube for `query`.
  - **subs** - Go to your subscriptions feed.
 
-
 ---
 
 #### Inbox
@@ -131,7 +130,6 @@ For example: `gh;koryschneider/mintab` or `gh;new`
  - **query** - Search your inbox for `query`.
  - **snoozed** - Go to your snoozed emails.
  - **done** - Go to your done (archived) emails.
-
 
 ---
 
