@@ -1,4 +1,5 @@
 let SETTINGS: object;
+let NEW_TAB: boolean = false;
 
 window.onload = () => {
   loadSettings();
@@ -214,7 +215,13 @@ function interpret(): void {
 
   // Execute
   if (validCommand) {
-    args = args.slice(1, args.length);
+    args.slice(1, args.length); // remove command
+
+    if (args.length > 1 && args[args.length - 1] === 'n') {
+      NEW_TAB = true;
+      args.splice(args[args.length - 1], 1);
+    }
+
     COMMANDS[command](args);
   } else {
     COMMANDS[SETTINGS['defaultCommand']](args);
@@ -238,7 +245,7 @@ function redirect(url: string, search?: string, query?: string, args?: Array<str
     }
   }
 
-  if (newtab) {
+  if (newtab || NEW_TAB) {
     window.open(destination).focus();
   } else {
     window.location.href = destination;
