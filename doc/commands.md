@@ -185,7 +185,7 @@ For example: `gh;koryschneider/mintab` or `gh;new`
 ---
 
 #### Google Maps
-`gm [;query]`
+`map [;query]`
 
  - **query** - Search Google Maps for `query`.
 
@@ -213,4 +213,4 @@ For example: `gh;koryschneider/mintab` or `gh;new`
 ---
 
 #### Google Calendar
-`gc` - Go to Google Calendar
+`cal` - Go to Google Calendar
