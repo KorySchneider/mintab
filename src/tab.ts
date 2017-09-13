@@ -80,7 +80,7 @@ const COMMANDS = {
   'a': (args) => { redirect('https://smile.amazon.com', '/s/?field-keywords=', undefined, encodeArgs(args)) },
 
   // Wikipedia
-  'w': (args) => { redirect('https://wikipedia.org', '/w/index.php?title=Special:Search&search=', undefined, encodeArgs(args, 1)) },
+  'w': (args) => { redirect('https://wikipedia.org', '/w/index.php?title=Special:Search&search=', undefined, encodeArgs(args, true)) },
 
   // GitHub
   'gh': (args) => { redirect('https://github.com', '/', undefined, args) },
@@ -253,7 +253,7 @@ function redirect(url: string, search?: string, query?: string, args?: Array<str
   return false;
 }
 
-function encodeArgs(args: Array<string>, alt: number = 0): Array<string> {
+function encodeArgs(args: Array<string>, alt: boolean = false): Array<string> {
   if (alt) {
     for (let i=0; i < args.length; i++) {
       args[i] = args[i].replace(/ /g, '+'); // replace spaces with plus signs
