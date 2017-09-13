@@ -12,7 +12,9 @@ window.onload = () => {
 const ALIASES = {
 // alias: command
   'cal': 'gc',
-  'gk': 'k'
+  'gk': 'k',
+  'ddg': 'dg',
+  'map': 'gm'
 };
 
 const COMMANDS = {
