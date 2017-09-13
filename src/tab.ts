@@ -4,7 +4,9 @@ window.onload = () => {
   loadSettings();
   applySettings();
 
-  document.body.addEventListener('click', () => { document.querySelector('#input').focus(); }
+  document.body.addEventListener('click', () => {
+    document.querySelector('#input').focus();
+  });
 }
 
 const ALIASES = {
@@ -183,16 +185,14 @@ const COMMANDS = {
     saveSettings();
     applySettings();
   }
-}
+};
 
 function interpret(): void {
   let input = document.querySelector('#input').value.trim();
   document.querySelector('#input').value = '';
 
   // Input is empty
-  if (input == '') {
-    return;
-  }
+  if (input == '') return;
 
   // Input is a URL
   if (/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(input)) {
@@ -203,16 +203,17 @@ function interpret(): void {
   }
 
   // Parse & format input
-  const commandList = Object.keys(COMMANDS);
-  const aliasList = Object.keys(ALIASES);
-  const args: Array<string> = input.split(';');
-  const command: string = args[0].trim();
+  let args = input.split(';');
 
   for (let i=0; i < args.length; i++) {
     args[i] = args[i].trim();
   }
 
+  let command = args[0];
   let validCommand: boolean = false;
+  const commandList = Object.keys(COMMANDS);
+  const aliasList = Object.keys(ALIASES);
+
   for (let i=0; i < commandList.length; i++) {
     if (command == commandList[i]) {
       validCommand = true;
@@ -224,7 +225,7 @@ function interpret(): void {
 
   // Execute
   if (validCommand) {
-    args = args.slice(1, args.length);
+    args.splice(0, 1);
     COMMANDS[command](args);
   } else {
     COMMANDS[SETTINGS['defaultCommand']](args);
@@ -232,13 +233,9 @@ function interpret(): void {
 }
 
 function redirect(url: string, search?: string, query?: string, args?: Array<string>, newtab: boolean = false): boolean {
-  let destination: string;
-
-  if (!/(http(s)?:\/\/.)/.test(url)) {
-    destination = 'http://' + url;
-  } else {
-    destination = url;
-  }
+  let destination = (/(http(s)?:\/\/.)/.test(url))
+    ? url
+    : 'http://' + url;
 
   if (query) {
     destination += search + query;
