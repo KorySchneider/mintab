@@ -7,6 +7,12 @@ window.onload = () => {
   document.body.addEventListener('click', () => { document.querySelector('#input').focus(); }
 }
 
+const ALIASES = {
+// alias: command
+  'cal': 'gc',
+  'gk': 'k'
+};
+
 const COMMANDS = {
   // Google
   'g': (args) => { redirect('google.com', '/search?q=', undefined, encodeArgs(args)) },
@@ -197,6 +203,8 @@ function interpret(): void {
   }
 
   // Parse & format input
+  const commandList = Object.keys(COMMANDS);
+  const aliasList = Object.keys(ALIASES);
   const args: Array<string> = input.split(';');
   const command: string = args[0].trim();
 
@@ -205,10 +213,12 @@ function interpret(): void {
   }
 
   let validCommand: boolean = false;
-  let keys = Object.keys(COMMANDS);
-  for (let i=0; i < keys.length; i++) {
-    if (command == keys[i]) {
+  for (let i=0; i < commandList.length; i++) {
+    if (command == commandList[i]) {
       validCommand = true;
+    } else if (command == aliasList[i]) {
+      validCommand = true;
+      command = ALIASES[command];
     }
   }
 
