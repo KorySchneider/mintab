@@ -5,8 +5,18 @@ window.onload = () => {
   loadSettings();
   applySettings();
 
-  document.body.addEventListener('click', () => { document.querySelector('#input').focus(); }
+  document.body.addEventListener('click', () => {
+    document.querySelector('#input').focus();
+  });
 }
+
+const ALIASES = {
+// alias: command
+  'cal': 'gc',
+  'gk': 'k',
+  'ddg': 'dg',
+  'map': 'gm'
+};
 
 const COMMANDS = {
   // Google
@@ -73,7 +83,7 @@ const COMMANDS = {
   'a': (args) => { redirect('https://smile.amazon.com', '/s/?field-keywords=', undefined, encodeArgs(args)) },
 
   // Wikipedia
-  'w': (args) => { redirect('https://wikipedia.org', '/w/index.php?title=Special:Search&search=', undefined, encodeArgs(args, 1)) },
+  'w': (args) => { redirect('https://wikipedia.org', '/w/index.php?title=Special:Search&search=', undefined, encodeArgs(args, true)) },
 
   // GitHub
   'gh': (args) => { redirect('https://github.com', '/', undefined, args) },
@@ -178,16 +188,14 @@ const COMMANDS = {
     saveSettings();
     applySettings();
   }
-}
+};
 
 function interpret(): void {
   let input = document.querySelector('#input').value.trim();
   document.querySelector('#input').value = '';
 
   // Input is empty
-  if (input == '') {
-    return;
-  }
+  if (input == '') return;
 
   // Input is a URL
   if (/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(input)) {
@@ -198,28 +206,33 @@ function interpret(): void {
   }
 
   // Parse & format input
-  const args: Array<string> = input.split(';');
-  const command: string = args[0].trim();
+  let args = input.split(';');
 
   for (let i=0; i < args.length; i++) {
     args[i] = args[i].trim();
   }
 
+  let command = args[0];
   let validCommand: boolean = false;
-  let keys = Object.keys(COMMANDS);
-  for (let i=0; i < keys.length; i++) {
-    if (command == keys[i]) {
+  const commandList = Object.keys(COMMANDS);
+  const aliasList = Object.keys(ALIASES);
+
+  for (let i=0; i < commandList.length; i++) {
+    if (command == commandList[i]) {
       validCommand = true;
+    } else if (command == aliasList[i]) {
+      validCommand = true;
+      command = ALIASES[command];
     }
   }
 
   // Execute
   if (validCommand) {
-    args.slice(1, args.length); // remove command
+    args.splice(0, 1); // remove command
 
     if (args.length > 1 && args[args.length - 1] === 'n') {
       NEW_TAB = true;
-      args.splice(args[args.length - 1], 1);
+      args.splice(args[args.length - 1], 1); // remove flag
     }
 
     COMMANDS[command](args);
@@ -229,13 +242,9 @@ function interpret(): void {
 }
 
 function redirect(url: string, search?: string, query?: string, args?: Array<string>, newtab: boolean = false): boolean {
-  let destination: string;
-
-  if (!/(http(s)?:\/\/.)/.test(url)) {
-    destination = 'http://' + url;
-  } else {
-    destination = url;
-  }
+  let destination = (/(http(s)?:\/\/.)/.test(url))
+    ? url
+    : 'http://' + url;
 
   if (query) {
     destination += search + query;
@@ -253,7 +262,7 @@ function redirect(url: string, search?: string, query?: string, args?: Array<str
   return false;
 }
 
-function encodeArgs(args: Array<string>, alt: number = 0): Array<string> {
+function encodeArgs(args: Array<string>, alt: boolean = false): Array<string> {
   if (alt) {
     for (let i=0; i < args.length; i++) {
       args[i] = args[i].replace(/ /g, '+'); // replace spaces with plus signs
