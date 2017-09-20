@@ -136,6 +136,9 @@ const COMMANDS = {
   // Keep
   'k': (args) => { redirect('https://keep.google.com', '/#search/text=', undefined, encodeArgs(args)) },
 
+  // School
+  'tr': (args) => { redirect('https://trello.com', '/search?q=', undefined, encodeArgs(args)) },
+
   // Dictionary
   'dict': (args) => { redirect('dictionary.com', '/browse/', undefined, encodeArgs(args)) },
 
