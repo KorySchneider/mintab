@@ -46,6 +46,7 @@ Arguments in [brackets] are optional. Vertical pipes (`|`) mean 'or'.
    - [Google Maps](#google-maps)
    - [Google Drive](#google-drive)
    - [Google Keep](#google-keep)
+   - [Trello](#trello)
    - [Google Images](#google-images)
    - [Google Calendar](#google-calendar)
 
@@ -200,6 +201,13 @@ For example: `gh;koryschneider/mintab` or `gh;new`
 `k [;query]`
 
  - **query** - Search Google Keep for `query`.
+
+---
+
+#### Trello
+`tr [;query]`
+
+ - **query** - Search Trello for `query`.
 
 ---
 
