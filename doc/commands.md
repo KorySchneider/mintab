@@ -1,8 +1,9 @@
 ## Usage
 
 Type a command, then optionally add arguments (separrated by semicolons).
+
 Commands are shortcuts for websites; enter a command by itself to go to the
-corresponding website or add arguments to quickly get to traverse the site.
+corresponding website or add arguments to quickly traverse the site.
 
 Some examples:
 
