@@ -5,6 +5,9 @@ Type a command, then optionally add arguments (separrated by semicolons).
 Commands are shortcuts for websites; enter a command by itself to go to the
 corresponding website or add arguments to quickly traverse the site.
 
+If no command is specified, the default command will execute. The default,
+default command is Google (use the `set` command to change this).
+
 Some examples:
 
  - `y;cats` Search YouTube for 'cats'
@@ -15,9 +18,6 @@ Some examples:
 
 Leading and trailing spaces will be stripped, so `y ; cats`, `y;cats` and `y;
 cats` will all do the same thing (search YouTube for "cats").
-
-If no command is specified, the default command will execute. The default,
-default command is Google (use the `set` command to change this).
 
 ## Commands
 
