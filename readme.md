@@ -11,3 +11,7 @@ use [this nifty browser extension][chrome ext] to make mintab your new tab page
 
 [mintab]: https://koryschneider.github.io/mintab
 [chrome ext]: https://chrome.google.com/webstore/detail/mintab/ggkhmapnplaljplbhkbdjkbjadbhadap
+
+### Screenshot
+it looks like this:
+![screenshot](img/screen.jpg)
