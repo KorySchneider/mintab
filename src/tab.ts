@@ -215,7 +215,7 @@ function interpret(): void {
     args[i] = args[i].trim();
   }
 
-  let command = args[0];
+  let command = args[0].toLowerCase();
   let validCommand: boolean = false;
   const commandList = Object.keys(COMMANDS);
   const aliasList = Object.keys(ALIASES);
