@@ -70,7 +70,7 @@ const COMMANDS = {
         redirect(url);
         break;
       case 1:
-        if (args[0] == 'subs') {
+        if (args[0] == 'subs' || args[0] == 's') {
           redirect(url, '', '/feed/subscriptions', undefined);
         } else {
           redirect(url, search, undefined, args)
