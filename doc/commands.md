@@ -119,10 +119,10 @@ For example: `gh;koryschneider/mintab` or `gh;new`
 ---
 
 #### YouTube
-`y [;query | subs]`
+`y [;query | subs | s]`
 
  - **query** - Search YouTube for `query`.
- - **subs** - Go to your subscriptions feed.
+ - **subs** / **s** - Go to your subscriptions feed.
 
 ---
 
