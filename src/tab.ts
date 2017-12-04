@@ -89,7 +89,7 @@ const COMMANDS = {
   'gh': (args) => { redirect('https://github.com', '/', undefined, args) },
 
   // GitHub Gist
-  'gist': (args) => { redirect('https://gist.github.com', '/search?q=', undefined, encodeArgs(args)) },
+  'gist': (args) => { redirect('https://gist.github.com', '/', undefined, encodeArgs(args)) },
 
   // Wolfram Alpha
   'wa': (args) => { redirect('wolframalpha.com', '/input/?i=', undefined, encodeArgs(args)) },

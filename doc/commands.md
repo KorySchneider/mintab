@@ -112,9 +112,9 @@ For example: `gh;koryschneider/mintab` or `gh;new`
 ---
 
 #### GitHub Gist
-`gist [;query]`
+`gist [;username]`
 
- - **query** - Search Gists for `query`.
+ - **username** - View gists for GitHub user `username`.
 
 ---
 
