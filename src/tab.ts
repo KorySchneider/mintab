@@ -62,7 +62,7 @@ const COMMANDS = {
 
   // YouTube
   'y': (args) => {
-    const url = 'https://youtube.com'; const search = '/results?search_query=';
+    const url = 'https://youtube.com', search = '/results?search_query=';
     args = encodeArgs(args);
 
     switch(args.length) {
@@ -114,7 +114,7 @@ const COMMANDS = {
 
   // Inbox
   'i': (args) => {
-    const url = 'https://inbox.google.com'; const search = '/search/';
+    const url = 'https://inbox.google.com', search = '/search/';
     args = encodeArgs(args);
 
     switch(args.length) {
