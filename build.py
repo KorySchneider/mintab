@@ -18,7 +18,7 @@ subprocess.run(autoprefix_cmd.split(), stdout=subprocess.PIPE).stdout.decode('ut
 # autoprefixer prints confirmation/timing
 
 # compile ts
-compile_cmd = 'tsc src/tab.ts --outFile build/tab.js'
+compile_cmd = 'ntsc src/tab.ts --outFile build/tab.js'
 subprocess.run(compile_cmd.split(), stdout=subprocess.PIPE).stdout.decode('utf-8')
 print('✔ Compiled src/tab.ts')
 
