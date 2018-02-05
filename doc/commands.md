@@ -15,6 +15,8 @@ Some examples:
  - `r;dadjokes;top` Go to the top posts of the DadJokes subreddit
 
  - `example.com` Go to example.com
+ 
+ - `set;defaultCommand;ddg` Set the default command to DuckDuckGo
 
 Leading and trailing spaces will be stripped, so `y ; cats`, `y;cats` and `y;
 cats` will all do the same thing (search YouTube for "cats").
