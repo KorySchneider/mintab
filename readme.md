@@ -3,7 +3,7 @@
  - [What](#what)
  - [How](#how)
  - [Screenshot](#screenshot)
- - [Browser Extension](#browser extension)
+ - [Browser Extension](#browser-extension)
 
 ### What
 a _really_ minimal [startpage][mintab]
