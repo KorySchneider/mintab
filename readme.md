@@ -9,6 +9,12 @@ see [this page](doc/commands.md) for instructions
 ### Extension
 use [this nifty browser extension][chrome ext] to make mintab your new tab page
 
+if you're having issues with the extension:
+ - Open a new tab and go to about:extensions
+ - Click the checkbox next to 'Developer mode'
+ - Click 'Update extensions now'
+ - Restart Chrome/ium
+
 ### Screenshot
 it looks like this:
 ![screenshot](img/screen.jpg)
